@@ -1,0 +1,516 @@
+simulation,stage,home_team,away_team,home_goals,away_goals,winner,method
+1,Group,Mexico,South Africa,0,0,Draw,
+1,Group,South Korea,Czech Republic,3,2,South Korea,
+1,Group,United States,Paraguay,0,3,Paraguay,
+1,Group,Canada,Bosnia and Herzegovina,1,1,Draw,
+1,Group,Brazil,Morocco,1,0,Brazil,
+1,Group,Haiti,Scotland,2,3,Scotland,
+1,Group,Qatar,Switzerland,1,4,Switzerland,
+1,Group,Australia,Turkey,1,0,Australia,
+1,Group,Netherlands,Japan,1,1,Draw,
+1,Group,Sweden,Tunisia,2,2,Draw,
+1,Group,Germany,Curaçao,2,0,Germany,
+1,Group,Ivory Coast,Ecuador,0,1,Ecuador,
+1,Group,Spain,Cape Verde,3,0,Spain,
+1,Group,Iran,New Zealand,0,2,New Zealand,
+1,Group,Saudi Arabia,Uruguay,0,1,Uruguay,
+1,Group,Belgium,Egypt,1,1,Draw,
+1,Group,France,Senegal,0,0,Draw,
+1,Group,Iraq,Norway,1,0,Iraq,
+1,Group,Argentina,Algeria,0,1,Algeria,
+1,Group,Austria,Jordan,2,0,Austria,
+1,Group,England,Croatia,1,1,Draw,
+1,Group,Portugal,DR Congo,6,0,Portugal,
+1,Group,Uzbekistan,Colombia,0,2,Colombia,
+1,Group,Ghana,Panama,2,0,Ghana,
+1,Group,Czech Republic,South Africa,3,2,Czech Republic,
+1,Group,Switzerland,Bosnia and Herzegovina,2,1,Switzerland,
+1,Group,Canada,Qatar,0,0,Draw,
+1,Group,Mexico,South Korea,1,1,Draw,
+1,Group,Scotland,Morocco,1,0,Scotland,
+1,Group,Brazil,Haiti,4,0,Brazil,
+1,Group,Turkey,Paraguay,2,3,Paraguay,
+1,Group,United States,Australia,2,0,United States,
+1,Group,Tunisia,Japan,1,0,Tunisia,
+1,Group,Netherlands,Sweden,4,0,Netherlands,
+1,Group,Ecuador,Curaçao,5,0,Ecuador,
+1,Group,Germany,Ivory Coast,2,0,Germany,
+1,Group,Spain,Saudi Arabia,0,1,Saudi Arabia,
+1,Group,Belgium,Iran,4,4,Draw,
+1,Group,Uruguay,Cape Verde,1,0,Uruguay,
+1,Group,New Zealand,Egypt,1,0,New Zealand,
+1,Group,Argentina,Austria,1,0,Argentina,
+1,Group,Norway,Senegal,1,3,Senegal,
+1,Group,France,Iraq,0,0,Draw,
+1,Group,Jordan,Algeria,0,1,Algeria,
+1,Group,England,Ghana,0,0,Draw,
+1,Group,Portugal,Uzbekistan,0,0,Draw,
+1,Group,Panama,Croatia,0,2,Croatia,
+1,Group,Colombia,DR Congo,0,1,DR Congo,
+1,Group,Morocco,Haiti,3,0,Morocco,
+1,Group,South Africa,South Korea,3,1,South Africa,
+1,Group,Mexico,Czech Republic,3,1,Mexico,
+1,Group,Scotland,Brazil,1,3,Brazil,
+1,Group,Bosnia and Herzegovina,Qatar,0,3,Qatar,
+1,Group,Canada,Switzerland,1,0,Canada,
+1,Group,Japan,Sweden,3,1,Japan,
+1,Group,Ecuador,Germany,3,1,Ecuador,
+1,Group,United States,Turkey,1,1,Draw,
+1,Group,Tunisia,Netherlands,1,3,Netherlands,
+1,Group,Curaçao,Ivory Coast,1,1,Draw,
+1,Group,Paraguay,Australia,2,2,Draw,
+1,Group,Norway,France,0,2,France,
+1,Group,Cape Verde,Saudi Arabia,0,1,Saudi Arabia,
+1,Group,Egypt,Iran,0,0,Draw,
+1,Group,Senegal,Iraq,2,0,Senegal,
+1,Group,New Zealand,Belgium,1,1,Draw,
+1,Group,Uruguay,Spain,1,3,Spain,
+1,Group,Jordan,Argentina,2,2,Draw,
+1,Group,DR Congo,Uzbekistan,2,1,DR Congo,
+1,Group,Panama,England,0,2,England,
+1,Group,Algeria,Austria,4,2,Algeria,
+1,Group,Colombia,Portugal,1,5,Portugal,
+1,Group,Croatia,Ghana,2,0,Croatia,
+1,Round of 32,South Africa,Canada,0,1,Canada,90
+1,Round of 32,Ecuador,Qatar,1,1,Ecuador,ET
+1,Round of 32,Netherlands,Scotland,2,0,Netherlands,90
+1,Round of 32,Brazil,Japan,0,1,Japan,90
+1,Round of 32,Senegal,Uruguay,0,1,Uruguay,90
+1,Round of 32,Germany,France,0,2,France,90
+1,Round of 32,Mexico,Tunisia,0,2,Tunisia,90
+1,Round of 32,Croatia,Iraq,0,1,Iraq,90
+1,Round of 32,Paraguay,Ghana,3,1,Paraguay,90
+1,Round of 32,New Zealand,South Korea,1,2,South Korea,90
+1,Round of 32,DR Congo,England,0,3,England,90
+1,Round of 32,Spain,Argentina,3,0,Spain,90
+1,Round of 32,Switzerland,United States,0,0,Switzerland,ET
+1,Round of 32,Algeria,Saudi Arabia,0,0,Algeria,ET
+1,Round of 32,Portugal,Morocco,2,0,Portugal,90
+1,Round of 32,Australia,Belgium,1,0,Australia,90
+1,Round of 16,Canada,Netherlands,0,5,Netherlands,90
+1,Round of 16,Ecuador,Uruguay,0,2,Uruguay,90
+1,Round of 16,Japan,France,2,2,Japan,ET
+1,Round of 16,Tunisia,Iraq,0,0,Tunisia,ET
+1,Round of 16,England,Spain,0,1,Spain,90
+1,Round of 16,Paraguay,South Korea,2,2,Paraguay,PEN
+1,Round of 16,Algeria,Australia,1,3,Australia,90
+1,Round of 16,Switzerland,Portugal,1,1,Switzerland,ET
+1,Quarterfinal,Netherlands,Uruguay,0,2,Uruguay,90
+1,Quarterfinal,Spain,Paraguay,3,0,Spain,90
+1,Quarterfinal,Japan,Tunisia,2,0,Japan,90
+1,Quarterfinal,Australia,Switzerland,0,1,Switzerland,90
+1,Semifinal,Uruguay,Spain,0,2,Spain,90
+1,Semifinal,Japan,Switzerland,0,0,Switzerland,PEN
+1,Final,Spain,Switzerland,1,1,Spain,PEN
+2,Group,Mexico,South Africa,1,1,Draw,
+2,Group,South Korea,Czech Republic,1,2,Czech Republic,
+2,Group,United States,Paraguay,0,0,Draw,
+2,Group,Canada,Bosnia and Herzegovina,1,1,Draw,
+2,Group,Brazil,Morocco,2,2,Draw,
+2,Group,Haiti,Scotland,1,1,Draw,
+2,Group,Qatar,Switzerland,2,2,Draw,
+2,Group,Australia,Turkey,2,0,Australia,
+2,Group,Netherlands,Japan,2,0,Netherlands,
+2,Group,Sweden,Tunisia,0,2,Tunisia,
+2,Group,Germany,Curaçao,2,0,Germany,
+2,Group,Ivory Coast,Ecuador,0,1,Ecuador,
+2,Group,Spain,Cape Verde,1,0,Spain,
+2,Group,Iran,New Zealand,0,0,Draw,
+2,Group,Saudi Arabia,Uruguay,2,5,Uruguay,
+2,Group,Belgium,Egypt,2,0,Belgium,
+2,Group,France,Senegal,1,1,Draw,
+2,Group,Iraq,Norway,1,3,Norway,
+2,Group,Argentina,Algeria,3,0,Argentina,
+2,Group,Austria,Jordan,2,0,Austria,
+2,Group,England,Croatia,0,0,Draw,
+2,Group,Portugal,DR Congo,1,0,Portugal,
+2,Group,Uzbekistan,Colombia,2,2,Draw,
+2,Group,Ghana,Panama,2,1,Ghana,
+2,Group,Czech Republic,South Africa,5,2,Czech Republic,
+2,Group,Switzerland,Bosnia and Herzegovina,0,2,Bosnia and Herzegovina,
+2,Group,Canada,Qatar,0,0,Draw,
+2,Group,Mexico,South Korea,1,0,Mexico,
+2,Group,Scotland,Morocco,1,2,Morocco,
+2,Group,Brazil,Haiti,3,0,Brazil,
+2,Group,Turkey,Paraguay,1,0,Turkey,
+2,Group,United States,Australia,1,3,Australia,
+2,Group,Tunisia,Japan,2,3,Japan,
+2,Group,Netherlands,Sweden,4,0,Netherlands,
+2,Group,Ecuador,Curaçao,2,0,Ecuador,
+2,Group,Germany,Ivory Coast,0,0,Draw,
+2,Group,Spain,Saudi Arabia,3,0,Spain,
+2,Group,Belgium,Iran,2,0,Belgium,
+2,Group,Uruguay,Cape Verde,3,0,Uruguay,
+2,Group,New Zealand,Egypt,1,1,Draw,
+2,Group,Argentina,Austria,2,0,Argentina,
+2,Group,Norway,Senegal,1,1,Draw,
+2,Group,France,Iraq,2,1,France,
+2,Group,Jordan,Algeria,2,2,Draw,
+2,Group,England,Ghana,1,0,England,
+2,Group,Portugal,Uzbekistan,4,0,Portugal,
+2,Group,Panama,Croatia,0,1,Croatia,
+2,Group,Colombia,DR Congo,2,2,Draw,
+2,Group,Morocco,Haiti,1,0,Morocco,
+2,Group,South Africa,South Korea,1,2,South Korea,
+2,Group,Mexico,Czech Republic,2,0,Mexico,
+2,Group,Scotland,Brazil,0,0,Draw,
+2,Group,Bosnia and Herzegovina,Qatar,4,5,Qatar,
+2,Group,Canada,Switzerland,1,0,Canada,
+2,Group,Japan,Sweden,3,0,Japan,
+2,Group,Ecuador,Germany,2,1,Ecuador,
+2,Group,United States,Turkey,1,0,United States,
+2,Group,Tunisia,Netherlands,1,1,Draw,
+2,Group,Curaçao,Ivory Coast,1,1,Draw,
+2,Group,Paraguay,Australia,4,1,Paraguay,
+2,Group,Norway,France,1,2,France,
+2,Group,Cape Verde,Saudi Arabia,1,1,Draw,
+2,Group,Egypt,Iran,3,3,Draw,
+2,Group,Senegal,Iraq,0,1,Iraq,
+2,Group,New Zealand,Belgium,0,2,Belgium,
+2,Group,Uruguay,Spain,0,3,Spain,
+2,Group,Jordan,Argentina,0,2,Argentina,
+2,Group,DR Congo,Uzbekistan,1,1,Draw,
+2,Group,Panama,England,1,1,Draw,
+2,Group,Algeria,Austria,3,1,Algeria,
+2,Group,Colombia,Portugal,1,1,Draw,
+2,Group,Croatia,Ghana,2,0,Croatia,
+2,Round of 32,Czech Republic,Canada,0,1,Canada,90
+2,Round of 32,Ecuador,Bosnia and Herzegovina,0,1,Bosnia and Herzegovina,90
+2,Round of 32,Netherlands,Brazil,1,0,Netherlands,90
+2,Round of 32,Morocco,Japan,1,1,Japan,PEN
+2,Round of 32,France,Tunisia,1,1,France,ET
+2,Round of 32,Germany,Norway,2,2,Norway,PEN
+2,Round of 32,Mexico,Iraq,1,0,Mexico,90
+2,Round of 32,Croatia,Austria,2,5,Austria,90
+2,Round of 32,Australia,United States,3,0,Australia,90
+2,Round of 32,Belgium,South Korea,2,0,Belgium,90
+2,Round of 32,Colombia,England,0,1,England,90
+2,Round of 32,Spain,Algeria,1,0,Spain,90
+2,Round of 32,Qatar,Ghana,0,0,Qatar,PEN
+2,Round of 32,Argentina,Uruguay,4,2,Argentina,90
+2,Round of 32,Portugal,DR Congo,2,0,Portugal,90
+2,Round of 32,Paraguay,Egypt,3,2,Paraguay,90
+2,Round of 16,Canada,Netherlands,0,0,Netherlands,ET
+2,Round of 16,Bosnia and Herzegovina,France,0,3,France,90
+2,Round of 16,Japan,Norway,0,3,Norway,90
+2,Round of 16,Mexico,Austria,4,0,Mexico,90
+2,Round of 16,England,Spain,0,1,Spain,90
+2,Round of 16,Australia,Belgium,0,1,Belgium,90
+2,Round of 16,Argentina,Paraguay,3,2,Argentina,90
+2,Round of 16,Qatar,Portugal,0,1,Portugal,90
+2,Quarterfinal,Netherlands,France,2,2,France,ET
+2,Quarterfinal,Spain,Belgium,1,2,Belgium,90
+2,Quarterfinal,Norway,Mexico,0,0,Mexico,PEN
+2,Quarterfinal,Argentina,Portugal,1,0,Argentina,90
+2,Semifinal,France,Belgium,2,0,France,90
+2,Semifinal,Mexico,Argentina,0,2,Argentina,90
+2,Final,France,Argentina,0,2,Argentina,90
+3,Group,Mexico,South Africa,2,1,Mexico,
+3,Group,South Korea,Czech Republic,5,0,South Korea,
+3,Group,United States,Paraguay,2,2,Draw,
+3,Group,Canada,Bosnia and Herzegovina,4,0,Canada,
+3,Group,Brazil,Morocco,1,2,Morocco,
+3,Group,Haiti,Scotland,0,0,Draw,
+3,Group,Qatar,Switzerland,2,1,Qatar,
+3,Group,Australia,Turkey,0,2,Turkey,
+3,Group,Netherlands,Japan,3,0,Netherlands,
+3,Group,Sweden,Tunisia,1,1,Draw,
+3,Group,Germany,Curaçao,5,0,Germany,
+3,Group,Ivory Coast,Ecuador,2,2,Draw,
+3,Group,Spain,Cape Verde,1,0,Spain,
+3,Group,Iran,New Zealand,3,0,Iran,
+3,Group,Saudi Arabia,Uruguay,0,1,Uruguay,
+3,Group,Belgium,Egypt,1,0,Belgium,
+3,Group,France,Senegal,3,0,France,
+3,Group,Iraq,Norway,0,5,Norway,
+3,Group,Argentina,Algeria,0,0,Draw,
+3,Group,Austria,Jordan,3,0,Austria,
+3,Group,England,Croatia,0,1,Croatia,
+3,Group,Portugal,DR Congo,1,1,Draw,
+3,Group,Uzbekistan,Colombia,1,3,Colombia,
+3,Group,Ghana,Panama,0,1,Panama,
+3,Group,Czech Republic,South Africa,1,1,Draw,
+3,Group,Switzerland,Bosnia and Herzegovina,3,1,Switzerland,
+3,Group,Canada,Qatar,3,0,Canada,
+3,Group,Mexico,South Korea,0,1,South Korea,
+3,Group,Scotland,Morocco,0,1,Morocco,
+3,Group,Brazil,Haiti,1,1,Draw,
+3,Group,Turkey,Paraguay,3,0,Turkey,
+3,Group,United States,Australia,1,1,Draw,
+3,Group,Tunisia,Japan,1,4,Japan,
+3,Group,Netherlands,Sweden,1,1,Draw,
+3,Group,Ecuador,Curaçao,1,0,Ecuador,
+3,Group,Germany,Ivory Coast,1,0,Germany,
+3,Group,Spain,Saudi Arabia,3,0,Spain,
+3,Group,Belgium,Iran,2,0,Belgium,
+3,Group,Uruguay,Cape Verde,3,0,Uruguay,
+3,Group,New Zealand,Egypt,3,0,New Zealand,
+3,Group,Argentina,Austria,2,1,Argentina,
+3,Group,Norway,Senegal,2,0,Norway,
+3,Group,France,Iraq,2,0,France,
+3,Group,Jordan,Algeria,0,3,Algeria,
+3,Group,England,Ghana,1,1,Draw,
+3,Group,Portugal,Uzbekistan,1,2,Uzbekistan,
+3,Group,Panama,Croatia,0,3,Croatia,
+3,Group,Colombia,DR Congo,2,0,Colombia,
+3,Group,Morocco,Haiti,2,1,Morocco,
+3,Group,South Africa,South Korea,0,1,South Korea,
+3,Group,Mexico,Czech Republic,0,3,Czech Republic,
+3,Group,Scotland,Brazil,1,1,Draw,
+3,Group,Bosnia and Herzegovina,Qatar,0,0,Draw,
+3,Group,Canada,Switzerland,0,0,Draw,
+3,Group,Japan,Sweden,0,0,Draw,
+3,Group,Ecuador,Germany,0,1,Germany,
+3,Group,United States,Turkey,2,5,Turkey,
+3,Group,Tunisia,Netherlands,1,1,Draw,
+3,Group,Curaçao,Ivory Coast,0,0,Draw,
+3,Group,Paraguay,Australia,1,2,Australia,
+3,Group,Norway,France,1,1,Draw,
+3,Group,Cape Verde,Saudi Arabia,3,2,Cape Verde,
+3,Group,Egypt,Iran,0,0,Draw,
+3,Group,Senegal,Iraq,0,0,Draw,
+3,Group,New Zealand,Belgium,0,0,Draw,
+3,Group,Uruguay,Spain,2,1,Uruguay,
+3,Group,Jordan,Argentina,0,2,Argentina,
+3,Group,DR Congo,Uzbekistan,0,0,Draw,
+3,Group,Panama,England,0,0,Draw,
+3,Group,Algeria,Austria,0,1,Austria,
+3,Group,Colombia,Portugal,1,1,Draw,
+3,Group,Croatia,Ghana,1,0,Croatia,
+3,Round of 32,Czech Republic,Switzerland,2,0,Czech Republic,90
+3,Round of 32,Germany,Qatar,6,0,Germany,90
+3,Round of 32,Netherlands,Brazil,2,1,Netherlands,90
+3,Round of 32,Morocco,Japan,0,0,Morocco,ET
+3,Round of 32,Norway,New Zealand,2,0,Norway,90
+3,Round of 32,Ecuador,France,1,1,Ecuador,PEN
+3,Round of 32,South Korea,Sweden,3,1,South Korea,90
+3,Round of 32,Croatia,Algeria,0,0,Croatia,PEN
+3,Round of 32,Turkey,Ivory Coast,4,1,Turkey,90
+3,Round of 32,Belgium,Cape Verde,2,1,Belgium,90
+3,Round of 32,Uzbekistan,Panama,0,1,Panama,90
+3,Round of 32,Uruguay,Austria,0,3,Austria,90
+3,Round of 32,Canada,Mexico,3,2,Canada,90
+3,Round of 32,Argentina,Spain,0,0,Spain,ET
+3,Round of 32,Colombia,Portugal,1,1,Portugal,ET
+3,Round of 32,Australia,Iran,1,2,Iran,90
+3,Round of 16,Czech Republic,Netherlands,1,4,Netherlands,90
+3,Round of 16,Germany,Norway,1,2,Norway,90
+3,Round of 16,Morocco,Ecuador,2,0,Morocco,90
+3,Round of 16,South Korea,Croatia,2,2,South Korea,ET
+3,Round of 16,Panama,Austria,1,2,Austria,90
+3,Round of 16,Turkey,Belgium,2,1,Turkey,90
+3,Round of 16,Spain,Iran,3,3,Spain,ET
+3,Round of 16,Canada,Portugal,1,1,Canada,ET
+3,Quarterfinal,Netherlands,Norway,0,3,Norway,90
+3,Quarterfinal,Austria,Turkey,1,0,Austria,90
+3,Quarterfinal,Morocco,South Korea,0,0,Morocco,ET
+3,Quarterfinal,Spain,Canada,1,0,Spain,90
+3,Semifinal,Norway,Austria,2,1,Norway,90
+3,Semifinal,Morocco,Spain,3,1,Morocco,90
+3,Final,Norway,Morocco,1,1,Norway,PEN
+4,Group,Mexico,South Africa,2,1,Mexico,
+4,Group,South Korea,Czech Republic,0,2,Czech Republic,
+4,Group,United States,Paraguay,2,2,Draw,
+4,Group,Canada,Bosnia and Herzegovina,3,0,Canada,
+4,Group,Brazil,Morocco,0,1,Morocco,
+4,Group,Haiti,Scotland,0,1,Scotland,
+4,Group,Qatar,Switzerland,0,2,Switzerland,
+4,Group,Australia,Turkey,2,1,Australia,
+4,Group,Netherlands,Japan,0,1,Japan,
+4,Group,Sweden,Tunisia,0,0,Draw,
+4,Group,Germany,Curaçao,0,0,Draw,
+4,Group,Ivory Coast,Ecuador,1,2,Ecuador,
+4,Group,Spain,Cape Verde,2,0,Spain,
+4,Group,Iran,New Zealand,4,2,Iran,
+4,Group,Saudi Arabia,Uruguay,0,3,Uruguay,
+4,Group,Belgium,Egypt,2,0,Belgium,
+4,Group,France,Senegal,3,1,France,
+4,Group,Iraq,Norway,1,1,Draw,
+4,Group,Argentina,Algeria,2,1,Argentina,
+4,Group,Austria,Jordan,2,1,Austria,
+4,Group,England,Croatia,1,0,England,
+4,Group,Portugal,DR Congo,3,2,Portugal,
+4,Group,Uzbekistan,Colombia,0,2,Colombia,
+4,Group,Ghana,Panama,0,1,Panama,
+4,Group,Czech Republic,South Africa,1,0,Czech Republic,
+4,Group,Switzerland,Bosnia and Herzegovina,3,1,Switzerland,
+4,Group,Canada,Qatar,2,2,Draw,
+4,Group,Mexico,South Korea,0,1,South Korea,
+4,Group,Scotland,Morocco,2,0,Scotland,
+4,Group,Brazil,Haiti,2,0,Brazil,
+4,Group,Turkey,Paraguay,2,2,Draw,
+4,Group,United States,Australia,0,2,Australia,
+4,Group,Tunisia,Japan,2,2,Draw,
+4,Group,Netherlands,Sweden,4,3,Netherlands,
+4,Group,Ecuador,Curaçao,2,1,Ecuador,
+4,Group,Germany,Ivory Coast,2,0,Germany,
+4,Group,Spain,Saudi Arabia,4,0,Spain,
+4,Group,Belgium,Iran,1,0,Belgium,
+4,Group,Uruguay,Cape Verde,1,1,Draw,
+4,Group,New Zealand,Egypt,1,0,New Zealand,
+4,Group,Argentina,Austria,3,0,Argentina,
+4,Group,Norway,Senegal,1,1,Draw,
+4,Group,France,Iraq,4,0,France,
+4,Group,Jordan,Algeria,0,0,Draw,
+4,Group,England,Ghana,2,0,England,
+4,Group,Portugal,Uzbekistan,3,0,Portugal,
+4,Group,Panama,Croatia,0,1,Croatia,
+4,Group,Colombia,DR Congo,1,0,Colombia,
+4,Group,Morocco,Haiti,0,0,Draw,
+4,Group,South Africa,South Korea,0,3,South Korea,
+4,Group,Mexico,Czech Republic,1,1,Draw,
+4,Group,Scotland,Brazil,1,2,Brazil,
+4,Group,Bosnia and Herzegovina,Qatar,1,1,Draw,
+4,Group,Canada,Switzerland,1,1,Draw,
+4,Group,Japan,Sweden,2,0,Japan,
+4,Group,Ecuador,Germany,1,2,Germany,
+4,Group,United States,Turkey,1,2,Turkey,
+4,Group,Tunisia,Netherlands,0,4,Netherlands,
+4,Group,Curaçao,Ivory Coast,0,2,Ivory Coast,
+4,Group,Paraguay,Australia,3,2,Paraguay,
+4,Group,Norway,France,0,3,France,
+4,Group,Cape Verde,Saudi Arabia,1,2,Saudi Arabia,
+4,Group,Egypt,Iran,1,0,Egypt,
+4,Group,Senegal,Iraq,0,1,Iraq,
+4,Group,New Zealand,Belgium,0,3,Belgium,
+4,Group,Uruguay,Spain,0,2,Spain,
+4,Group,Jordan,Argentina,0,1,Argentina,
+4,Group,DR Congo,Uzbekistan,0,0,Draw,
+4,Group,Panama,England,1,0,Panama,
+4,Group,Algeria,Austria,2,2,Draw,
+4,Group,Colombia,Portugal,3,4,Portugal,
+4,Group,Croatia,Ghana,2,1,Croatia,
+4,Round of 32,South Korea,Canada,1,1,Canada,ET
+4,Round of 32,Germany,Turkey,0,0,Turkey,PEN
+4,Round of 32,Japan,Scotland,1,1,Japan,PEN
+4,Round of 32,Brazil,Netherlands,1,1,Netherlands,PEN
+4,Round of 32,France,Morocco,3,1,France,90
+4,Round of 32,Ecuador,Iraq,3,1,Ecuador,90
+4,Round of 32,Czech Republic,Ivory Coast,1,2,Ivory Coast,90
+4,Round of 32,England,Saudi Arabia,4,1,England,90
+4,Round of 32,Australia,Algeria,1,0,Australia,90
+4,Round of 32,Belgium,Mexico,0,1,Mexico,90
+4,Round of 32,Colombia,Croatia,2,3,Croatia,90
+4,Round of 32,Spain,Austria,3,1,Spain,90
+4,Round of 32,Switzerland,Egypt,0,1,Egypt,90
+4,Round of 32,Argentina,Uruguay,3,0,Argentina,90
+4,Round of 32,Portugal,Panama,1,0,Portugal,90
+4,Round of 32,Paraguay,Iran,0,1,Iran,90
+4,Round of 16,Canada,Japan,1,1,Japan,ET
+4,Round of 16,Turkey,France,1,0,Turkey,90
+4,Round of 16,Netherlands,Ecuador,1,0,Netherlands,90
+4,Round of 16,Ivory Coast,England,1,0,Ivory Coast,90
+4,Round of 16,Croatia,Spain,0,1,Spain,90
+4,Round of 16,Australia,Mexico,0,0,Australia,PEN
+4,Round of 16,Argentina,Iran,4,0,Argentina,90
+4,Round of 16,Egypt,Portugal,0,0,Portugal,PEN
+4,Quarterfinal,Japan,Turkey,2,0,Japan,90
+4,Quarterfinal,Spain,Australia,1,0,Spain,90
+4,Quarterfinal,Netherlands,Ivory Coast,0,0,Ivory Coast,PEN
+4,Quarterfinal,Argentina,Portugal,0,3,Portugal,90
+4,Semifinal,Japan,Spain,2,5,Spain,90
+4,Semifinal,Ivory Coast,Portugal,1,0,Ivory Coast,90
+4,Final,Spain,Ivory Coast,4,0,Spain,90
+5,Group,Mexico,South Africa,2,0,Mexico,
+5,Group,South Korea,Czech Republic,3,3,Draw,
+5,Group,United States,Paraguay,0,0,Draw,
+5,Group,Canada,Bosnia and Herzegovina,0,0,Draw,
+5,Group,Brazil,Morocco,3,1,Brazil,
+5,Group,Haiti,Scotland,0,2,Scotland,
+5,Group,Qatar,Switzerland,0,3,Switzerland,
+5,Group,Australia,Turkey,0,1,Turkey,
+5,Group,Netherlands,Japan,2,2,Draw,
+5,Group,Sweden,Tunisia,1,0,Sweden,
+5,Group,Germany,Curaçao,4,0,Germany,
+5,Group,Ivory Coast,Ecuador,2,2,Draw,
+5,Group,Spain,Cape Verde,1,0,Spain,
+5,Group,Iran,New Zealand,1,1,Draw,
+5,Group,Saudi Arabia,Uruguay,1,0,Saudi Arabia,
+5,Group,Belgium,Egypt,0,3,Egypt,
+5,Group,France,Senegal,3,2,France,
+5,Group,Iraq,Norway,0,0,Draw,
+5,Group,Argentina,Algeria,3,0,Argentina,
+5,Group,Austria,Jordan,6,0,Austria,
+5,Group,England,Croatia,3,1,England,
+5,Group,Portugal,DR Congo,2,0,Portugal,
+5,Group,Uzbekistan,Colombia,0,2,Colombia,
+5,Group,Ghana,Panama,2,0,Ghana,
+5,Group,Czech Republic,South Africa,0,0,Draw,
+5,Group,Switzerland,Bosnia and Herzegovina,3,0,Switzerland,
+5,Group,Canada,Qatar,3,0,Canada,
+5,Group,Mexico,South Korea,1,0,Mexico,
+5,Group,Scotland,Morocco,0,1,Morocco,
+5,Group,Brazil,Haiti,1,1,Draw,
+5,Group,Turkey,Paraguay,7,1,Turkey,
+5,Group,United States,Australia,0,5,Australia,
+5,Group,Tunisia,Japan,1,3,Japan,
+5,Group,Netherlands,Sweden,1,1,Draw,
+5,Group,Ecuador,Curaçao,1,0,Ecuador,
+5,Group,Germany,Ivory Coast,2,1,Germany,
+5,Group,Spain,Saudi Arabia,3,0,Spain,
+5,Group,Belgium,Iran,3,2,Belgium,
+5,Group,Uruguay,Cape Verde,3,0,Uruguay,
+5,Group,New Zealand,Egypt,1,5,Egypt,
+5,Group,Argentina,Austria,0,1,Austria,
+5,Group,Norway,Senegal,0,0,Draw,
+5,Group,France,Iraq,4,0,France,
+5,Group,Jordan,Algeria,1,2,Algeria,
+5,Group,England,Ghana,1,0,England,
+5,Group,Portugal,Uzbekistan,1,0,Portugal,
+5,Group,Panama,Croatia,2,3,Croatia,
+5,Group,Colombia,DR Congo,3,0,Colombia,
+5,Group,Morocco,Haiti,1,0,Morocco,
+5,Group,South Africa,South Korea,2,2,Draw,
+5,Group,Mexico,Czech Republic,3,3,Draw,
+5,Group,Scotland,Brazil,0,0,Draw,
+5,Group,Bosnia and Herzegovina,Qatar,1,1,Draw,
+5,Group,Canada,Switzerland,0,2,Switzerland,
+5,Group,Japan,Sweden,3,1,Japan,
+5,Group,Ecuador,Germany,0,5,Germany,
+5,Group,United States,Turkey,1,1,Draw,
+5,Group,Tunisia,Netherlands,0,4,Netherlands,
+5,Group,Curaçao,Ivory Coast,0,4,Ivory Coast,
+5,Group,Paraguay,Australia,3,0,Paraguay,
+5,Group,Norway,France,1,2,France,
+5,Group,Cape Verde,Saudi Arabia,0,2,Saudi Arabia,
+5,Group,Egypt,Iran,2,0,Egypt,
+5,Group,Senegal,Iraq,1,1,Draw,
+5,Group,New Zealand,Belgium,2,2,Draw,
+5,Group,Uruguay,Spain,1,2,Spain,
+5,Group,Jordan,Argentina,2,2,Draw,
+5,Group,DR Congo,Uzbekistan,0,4,Uzbekistan,
+5,Group,Panama,England,1,1,Draw,
+5,Group,Algeria,Austria,0,1,Austria,
+5,Group,Colombia,Portugal,1,0,Colombia,
+5,Group,Croatia,Ghana,3,0,Croatia,
+5,Round of 32,Czech Republic,Canada,4,1,Czech Republic,90
+5,Round of 32,Germany,Scotland,0,1,Scotland,90
+5,Round of 32,Japan,Brazil,0,0,Brazil,ET
+5,Round of 32,Morocco,Netherlands,6,1,Morocco,90
+5,Round of 32,France,Sweden,3,1,France,90
+5,Round of 32,Ivory Coast,Senegal,0,0,Ivory Coast,ET
+5,Round of 32,Mexico,Ecuador,1,1,Mexico,PEN
+5,Round of 32,England,Uruguay,0,0,England,PEN
+5,Round of 32,Turkey,Algeria,0,2,Algeria,90
+5,Round of 32,Egypt,Australia,0,0,Egypt,PEN
+5,Round of 32,Portugal,Croatia,0,0,Portugal,PEN
+5,Round of 32,Spain,Argentina,0,1,Argentina,90
+5,Round of 32,Switzerland,Uzbekistan,1,2,Uzbekistan,90
+5,Round of 32,Austria,Saudi Arabia,4,1,Austria,90
+5,Round of 32,Colombia,Ghana,2,1,Colombia,90
+5,Round of 32,Paraguay,Belgium,1,0,Paraguay,90
+5,Round of 16,Czech Republic,Brazil,1,3,Brazil,90
+5,Round of 16,Scotland,France,1,3,France,90
+5,Round of 16,Morocco,Ivory Coast,2,5,Ivory Coast,90
+5,Round of 16,Mexico,England,0,1,England,90
+5,Round of 16,Portugal,Argentina,3,2,Portugal,90
+5,Round of 16,Algeria,Egypt,1,0,Algeria,90
+5,Round of 16,Austria,Paraguay,0,2,Paraguay,90
+5,Round of 16,Uzbekistan,Colombia,2,3,Colombia,90
+5,Quarterfinal,Brazil,France,2,1,Brazil,90
+5,Quarterfinal,Portugal,Algeria,2,2,Algeria,ET
+5,Quarterfinal,Ivory Coast,England,0,2,England,90
+5,Quarterfinal,Paraguay,Colombia,1,3,Colombia,90
+5,Semifinal,Brazil,Algeria,1,2,Algeria,90
+5,Semifinal,England,Colombia,1,1,England,ET
+5,Final,Algeria,England,2,2,England,ET

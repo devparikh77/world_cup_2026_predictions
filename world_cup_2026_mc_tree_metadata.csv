@@ -1,0 +1,2 @@
+n_simulations,seed,sim_elo_k,draw_rate,description
+1000,20260611,18.0,0.22940851299060255,Sequential Monte Carlo tournament tree with rating updates after each simulated match.
