@@ -3,1747 +3,198 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>World Cup 2026 Round 1 Predictions</title>
+  <title>World Cup 2026 Monte Carlo Tree Forecast</title>
   <style>
     :root {
-      --ink: #18212f;
-      --muted: #667085;
-      --line: #d8dde8;
-      --paper: #f7f8fb;
-      --panel: #ffffff;
-      --home: #146c94;
-      --draw: #8a7a34;
-      --away: #9b3d53;
-      --accent: #1f7a5c;
-      --shadow: 0 12px 30px rgba(28, 39, 58, 0.10);
+      --ink:#172033; --muted:#667085; --line:#d8dde8; --paper:#f6f8fb; --panel:#fff;
+      --green:#1f7a5c; --blue:#146c94; --gold:#8a6d24; --red:#9b3d53;
+      --shadow:0 12px 30px rgba(28,39,58,.09);
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      color: var(--ink);
-      background: var(--paper);
-      font: 14px/1.45 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-    .hero {
-      color: white;
-      background:
-        linear-gradient(110deg, rgba(12, 36, 52, 0.92), rgba(15, 76, 92, 0.84)),
-        repeating-linear-gradient(90deg, rgba(255,255,255,.08) 0 1px, transparent 1px 72px);
-      padding: 34px 28px 24px;
-    }
-    .hero-inner, main { max-width: 1180px; margin: 0 auto; }
-    .eyebrow {
-      color: #bce2de;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-    h1 {
-      max-width: 860px;
-      margin: 8px 0 10px;
-      font-size: clamp(32px, 5vw, 58px);
-      line-height: 1;
-      letter-spacing: 0;
-    }
-    .subtitle {
-      max-width: 760px;
-      margin: 0;
-      color: #d9ebe9;
-      font-size: 16px;
-    }
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 22px;
-    }
-    .pill {
-      border: 1px solid rgba(255,255,255,.22);
-      border-radius: 999px;
-      padding: 7px 11px;
-      color: #eef8f6;
-      background: rgba(255,255,255,.08);
-      font-size: 12px;
-      font-weight: 700;
-    }
-    main { padding: 22px 22px 42px; }
-    .summary {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: -34px;
-    }
-    .metric {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      padding: 16px;
-      min-height: 112px;
-    }
-    .metric span {
-      display: block;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-    .metric strong {
-      display: block;
-      margin-top: 8px;
-      font-size: 24px;
-      line-height: 1.05;
-    }
-    .metric em {
-      display: block;
-      margin-top: 8px;
-      color: var(--muted);
-      font-style: normal;
-      font-size: 13px;
-    }
-    .toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      margin: 26px 0 14px;
-    }
-    h2 { margin: 0; font-size: 20px; letter-spacing: 0; }
-    .filters { display: flex; gap: 8px; flex-wrap: wrap; }
-    button {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: white;
-      color: var(--ink);
-      padding: 8px 12px;
-      font: inherit;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    button.active { background: var(--ink); color: white; border-color: var(--ink); }
-    .matches {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-    .match-card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-top: 4px solid var(--draw);
-      border-radius: 8px;
-      box-shadow: 0 8px 22px rgba(28, 39, 58, .06);
-      padding: 14px;
-    }
-    .match-card.strong { border-top-color: var(--accent); }
-    .match-card.lean { border-top-color: var(--home); }
-    .match-card.tossup { border-top-color: var(--draw); }
-    .match-topline {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-    }
-    .teams {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      gap: 10px;
-      margin: 14px 0 12px;
-    }
-    .team { display: flex; align-items: center; gap: 9px; min-width: 0; }
-    .away-team { justify-content: flex-end; text-align: right; }
-    .team-name {
-      font-weight: 800;
-      font-size: 16px;
-      white-space: normal;
-      overflow-wrap: anywhere;
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 38px;
-      height: 30px;
-      border-radius: 6px;
-      color: white;
-      background: var(--home);
-      font-size: 12px;
-      font-weight: 900;
-      flex: 0 0 auto;
-    }
-    .badge.away { background: var(--away); }
-    .versus { color: var(--muted); font-size: 12px; font-weight: 900; }
-    .probbar {
-      display: flex;
-      height: 10px;
-      overflow: hidden;
-      border-radius: 999px;
-      background: #eef1f5;
-    }
-    .probbar span { display: block; height: 100%; }
-    .probbar .home { background: var(--home); }
-    .probbar .draw { background: var(--draw); }
-    .probbar .away { background: var(--away); }
-    .prob-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
-      margin-top: 10px;
-    }
-    .prob-grid div {
-      background: #f3f5f8;
-      border-radius: 6px;
-      padding: 8px;
-      min-height: 58px;
-    }
-    .prob-grid span {
-      display: block;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 700;
-      overflow-wrap: anywhere;
-    }
-    .prob-grid strong { display: block; margin-top: 3px; font-size: 16px; }
-    .card-footer {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid var(--line);
-    }
-    .footer-label {
-      display: block;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-    .card-footer strong { display: block; margin-top: 2px; overflow-wrap: anywhere; }
-    .table-wrap {
-      overflow-x: auto;
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      margin-top: 22px;
-      box-shadow: 0 8px 22px rgba(28, 39, 58, .05);
-    }
-    table { width: 100%; border-collapse: collapse; min-width: 960px; }
-    th, td { padding: 11px 12px; border-bottom: 1px solid var(--line); text-align: left; }
-    th {
-      background: #edf2f7;
-      color: #394354;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-    }
-    td span { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
-    tr:last-child td { border-bottom: 0; }
-    .legend {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 12px;
-    }
-    .key { display: inline-flex; align-items: center; gap: 6px; }
-    .swatch { width: 18px; height: 8px; border-radius: 999px; display: inline-block; }
-    .swatch.home { background: var(--home); }
-    .swatch.draw { background: var(--draw); }
-    .swatch.away { background: var(--away); }
-    .notes {
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-    @media (max-width: 980px) {
-      .summary, .matches { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-    @media (max-width: 680px) {
-      .hero { padding: 28px 18px 22px; }
-      main { padding: 18px 14px 34px; }
-      .summary, .matches { grid-template-columns: 1fr; }
-      .toolbar { align-items: flex-start; flex-direction: column; }
-      .teams { grid-template-columns: 1fr; }
-      .versus { display: none; }
-      .away-team { justify-content: flex-start; text-align: left; flex-direction: row-reverse; }
-    }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:14px/1.45 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    header { background:linear-gradient(110deg,#10293a,#0c5962); color:white; padding:34px 24px 24px; }
+    .wrap, main { max-width:1220px; margin:0 auto; }
+    .eyebrow { color:#bce2de; text-transform:uppercase; font-size:12px; font-weight:800; letter-spacing:.08em; }
+    h1 { margin:8px 0 10px; font-size:clamp(32px,5vw,56px); line-height:1; letter-spacing:0; }
+    .subtitle { color:#d9ebe9; max-width:880px; margin:0; font-size:16px; }
+    .meta { display:flex; gap:10px; flex-wrap:wrap; margin-top:20px; }
+    .pill { border:1px solid rgba(255,255,255,.24); border-radius:999px; padding:7px 11px; background:rgba(255,255,255,.08); font-size:12px; font-weight:800; }
+    main { padding:22px 18px 44px; }
+    .tabs { display:flex; gap:8px; flex-wrap:wrap; margin-top:-34px; margin-bottom:18px; }
+    .tab-btn { border:1px solid var(--line); background:white; color:var(--ink); border-radius:999px; padding:10px 14px; font:inherit; font-weight:800; cursor:pointer; box-shadow:0 8px 18px rgba(28,39,58,.06); }
+    .tab-btn.active { background:var(--ink); color:white; border-color:var(--ink); }
+    .tab-panel { display:none; }
+    .tab-panel.active { display:block; }
+    .metric-grid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:12px; margin-bottom:18px; }
+    .metric, .placeholder, .method-card, .example { background:white; border:1px solid var(--line); border-radius:8px; padding:16px; box-shadow:var(--shadow); }
+    .metric span { display:block; color:var(--muted); font-size:12px; font-weight:800; text-transform:uppercase; }
+    .metric strong { display:block; margin-top:8px; font-size:28px; line-height:1.05; }
+    .metric em { color:var(--muted); display:block; margin-top:7px; font-style:normal; }
+    h2 { margin:24px 0 10px; font-size:21px; letter-spacing:0; }
+    h3 { margin:0 0 10px; font-size:16px; }
+    .table-wrap { overflow-x:auto; background:white; border:1px solid var(--line); border-radius:8px; box-shadow:0 8px 22px rgba(28,39,58,.05); margin-bottom:16px; }
+    table { width:100%; min-width:980px; border-collapse:collapse; }
+    th,td { border-bottom:1px solid var(--line); padding:9px 10px; text-align:left; vertical-align:top; }
+    th { background:#edf2f7; color:#394354; font-size:12px; text-transform:uppercase; letter-spacing:.04em; }
+    tr:last-child td { border-bottom:0; }
+    .placeholder { min-height:240px; display:flex; flex-direction:column; justify-content:center; }
+    .placeholder p, .method-card p, .example p { color:var(--muted); margin:6px 0 0; }
+    .method-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .example { margin-top:14px; }
+    .example-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+    .example-grid div { border:1px solid var(--line); border-radius:8px; background:#fbfcfe; padding:12px; }
+    .example-grid span { display:block; color:var(--muted); font-size:12px; font-weight:800; text-transform:uppercase; }
+    .example-grid strong { display:block; margin-top:6px; font-size:15px; }
+    .callout { border-left:4px solid var(--green); background:#eef7f3; padding:12px 14px; border-radius:6px; color:#335348 !important; margin-top:14px !important; }
+    .note { color:var(--muted); font-size:12px; margin-top:10px; }
+    @media (max-width:980px) { .metric-grid,.method-grid,.example-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:680px) { header { padding:28px 18px 22px; } main { padding:18px 14px 34px; } .metric-grid,.method-grid,.example-grid { grid-template-columns:1fr; } .tabs { margin-top:-28px; } }
   </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="hero-inner">
-      <div class="eyebrow">2026 World Cup Forecast</div>
-      <h1>Round 1 Match Predictions</h1>
-      <p class="subtitle">Probabilistic first-game forecasts using recency-weighted international Elo, tournament weights, host advantage, attack and defense form, betting priors, and low-weight squad market-value adjustments.</p>
-      <div class="hero-meta">
-        <span class="pill">24 fixtures</span>
-        <span class="pill">Training cutoff: June 11, 2026</span>
-        <span class="pill">Generated: 2026-06-11 04:37</span>
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">2026 World Cup Forecast System</div>
+      <h1>Monte Carlo Tournament Tree</h1>
+      <p class="subtitle">A sequential simulation model that samples match scorelines, updates team ratings after each simulated result, builds group standings, and rolls the tournament forward to a champion distribution.</p>
+      <div class="meta">
+        <span class="pill">V1: pre-tournament simulation</span>
+        <span class="pill">1,000 simulations</span>
+        <span class="pill">Seed 20260611</span>
+        <span class="pill">Generated 2026-06-11 15:41</span>
       </div>
     </div>
   </header>
 
   <main>
-    <section class="summary" aria-label="Prediction summary">
-      <div class="metric"><span>Strongest favorite</span><strong>Spain</strong><em>83.8% vs Cape Verde</em></div>
-      <div class="metric"><span>Closest match</span><strong>Brazil vs Morocco</strong><em>1.8% between top outcomes</em></div>
-      <div class="metric"><span>Highest draw risk</span><strong>Brazil vs Morocco</strong><em>26.8% draw probability</em></div>
-      <div class="metric"><span>Average top pick</span><strong>57.7%</strong><em>Mean confidence across fixtures</em></div>
+    <nav class="tabs" aria-label="Forecast versions">
+      <button class="tab-btn active" data-tab="v1">V1 Monte Carlo</button>
+      <button class="tab-btn" data-tab="v2">V2 After Round 1</button>
+      <button class="tab-btn" data-tab="v3">V3 After Rounds 1-2</button>
+      <button class="tab-btn" data-tab="methodology">Methodology</button>
+    </nav>
+
+    <section id="v1" class="tab-panel active">
+      <div class="metric-grid">
+        <div class="metric"><span>Top Champion Probability</span><strong>Spain</strong><em>32.6% title probability</em></div>
+        <div class="metric"><span>Most Common Final</span><strong>Argentina vs Spain</strong><em>7.6%</em></div>
+        <div class="metric"><span>Simulation Style</span><strong>Sequential</strong><em>ratings update after each sampled match</em></div>
+      </div>
+
+      <h2>Top Tournament Probabilities</h2>
+      
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Team</th><th>Group</th><th>Avg Rank</th><th>R32</th><th>R16</th><th>QF</th><th>SF</th><th>Final</th><th>Champion</th></tr></thead>
+          <tbody><tr><td>Spain</td><td>H</td><td>1.16</td><td>99.9%</td><td>84.9%</td><td>71.1%</td><td>58.1%</td><td>43.5%</td><td>32.6%</td></tr><tr><td>France</td><td>I</td><td>1.65</td><td>94.6%</td><td>76.2%</td><td>50.6%</td><td>34.3%</td><td>18.9%</td><td>10.7%</td></tr><tr><td>Portugal</td><td>K</td><td>1.56</td><td>95.1%</td><td>75.5%</td><td>48.2%</td><td>31.1%</td><td>19.6%</td><td>10.6%</td></tr><tr><td>Argentina</td><td>J</td><td>1.50</td><td>95.8%</td><td>61.0%</td><td>47.2%</td><td>29.6%</td><td>16.7%</td><td>7.5%</td></tr><tr><td>England</td><td>L</td><td>1.48</td><td>96.4%</td><td>69.4%</td><td>44.9%</td><td>25.6%</td><td>15.9%</td><td>7.1%</td></tr><tr><td>Germany</td><td>E</td><td>1.57</td><td>96.0%</td><td>68.3%</td><td>39.5%</td><td>24.4%</td><td>12.1%</td><td>6.5%</td></tr><tr><td>Morocco</td><td>C</td><td>1.67</td><td>94.7%</td><td>56.4%</td><td>39.6%</td><td>21.3%</td><td>9.8%</td><td>4.3%</td></tr><tr><td>Brazil</td><td>C</td><td>1.77</td><td>94.0%</td><td>55.3%</td><td>37.0%</td><td>20.1%</td><td>10.0%</td><td>3.5%</td></tr><tr><td>Japan</td><td>F</td><td>1.67</td><td>94.9%</td><td>51.5%</td><td>34.7%</td><td>16.6%</td><td>6.3%</td><td>3.3%</td></tr><tr><td>Colombia</td><td>K</td><td>1.99</td><td>89.4%</td><td>57.5%</td><td>29.2%</td><td>16.8%</td><td>8.4%</td><td>2.4%</td></tr><tr><td>Netherlands</td><td>F</td><td>1.83</td><td>92.0%</td><td>44.9%</td><td>27.0%</td><td>14.4%</td><td>5.8%</td><td>2.2%</td></tr><tr><td>Norway</td><td>I</td><td>2.23</td><td>83.7%</td><td>50.7%</td><td>24.3%</td><td>11.9%</td><td>4.0%</td><td>1.1%</td></tr><tr><td>Senegal</td><td>I</td><td>2.46</td><td>76.9%</td><td>44.2%</td><td>18.9%</td><td>7.3%</td><td>3.3%</td><td>1.0%</td></tr><tr><td>Iran</td><td>G</td><td>2.15</td><td>82.1%</td><td>44.5%</td><td>20.4%</td><td>5.5%</td><td>2.2%</td><td>0.8%</td></tr><tr><td>Turkey</td><td>D</td><td>1.96</td><td>86.0%</td><td>53.6%</td><td>23.6%</td><td>7.9%</td><td>3.3%</td><td>0.8%</td></tr><tr><td>Mexico</td><td>A</td><td>1.84</td><td>89.2%</td><td>49.2%</td><td>19.6%</td><td>6.6%</td><td>1.7%</td><td>0.8%</td></tr><tr><td>Uruguay</td><td>H</td><td>2.14</td><td>89.8%</td><td>30.5%</td><td>14.4%</td><td>5.6%</td><td>1.6%</td><td>0.6%</td></tr><tr><td>Algeria</td><td>J</td><td>2.37</td><td>78.1%</td><td>28.0%</td><td>14.6%</td><td>6.2%</td><td>2.6%</td><td>0.6%</td></tr><tr><td>Belgium</td><td>G</td><td>1.89</td><td>89.1%</td><td>57.6%</td><td>30.7%</td><td>9.9%</td><td>3.2%</td><td>0.6%</td></tr><tr><td>Australia</td><td>D</td><td>2.48</td><td>70.8%</td><td>36.5%</td><td>15.9%</td><td>4.3%</td><td>1.1%</td><td>0.6%</td></tr></tbody>
+        </table>
+      </div>
+    
+
+      <h2>All Teams By Group</h2>
+      
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Group</th><th>Team</th><th>Avg Rank</th><th>Top 2</th><th>Top 3</th><th>Reach R32</th><th>Champion</th></tr></thead>
+          <tbody><tr><td>A</td><td>Mexico</td><td>1.84</td><td>76.1%</td><td>92.6%</td><td>89.2%</td><td>0.8%</td></tr><tr><td>A</td><td>South Korea</td><td>2.06</td><td>69.1%</td><td>91.1%</td><td>86.2%</td><td>0.2%</td></tr><tr><td>A</td><td>Czech Republic</td><td>2.84</td><td>35.4%</td><td>67.9%</td><td>55.8%</td><td>0.2%</td></tr><tr><td>A</td><td>South Africa</td><td>3.26</td><td>19.4%</td><td>48.4%</td><td>37.4%</td><td>0.0%</td></tr><tr><td>B</td><td>Switzerland</td><td>1.55</td><td>88.5%</td><td>97.5%</td><td>95.3%</td><td>0.3%</td></tr><tr><td>B</td><td>Canada</td><td>2.03</td><td>72.1%</td><td>92.7%</td><td>87.4%</td><td>0.1%</td></tr><tr><td>B</td><td>Bosnia and Herzegovina</td><td>3.15</td><td>21.7%</td><td>57.1%</td><td>41.7%</td><td>0.0%</td></tr><tr><td>B</td><td>Qatar</td><td>3.26</td><td>17.7%</td><td>52.7%</td><td>35.9%</td><td>0.0%</td></tr><tr><td>C</td><td>Morocco</td><td>1.67</td><td>87.0%</td><td>96.8%</td><td>94.7%</td><td>4.3%</td></tr><tr><td>C</td><td>Brazil</td><td>1.77</td><td>83.7%</td><td>96.7%</td><td>94.0%</td><td>3.5%</td></tr><tr><td>C</td><td>Scotland</td><td>3.10</td><td>19.5%</td><td>66.0%</td><td>47.8%</td><td>0.2%</td></tr><tr><td>C</td><td>Haiti</td><td>3.47</td><td>9.8%</td><td>40.5%</td><td>27.3%</td><td>0.0%</td></tr><tr><td>D</td><td>Turkey</td><td>1.96</td><td>71.8%</td><td>88.8%</td><td>86.0%</td><td>0.8%</td></tr><tr><td>D</td><td>Australia</td><td>2.48</td><td>50.9%</td><td>77.3%</td><td>70.8%</td><td>0.6%</td></tr><tr><td>D</td><td>United States</td><td>2.55</td><td>47.9%</td><td>76.0%</td><td>68.2%</td><td>0.0%</td></tr><tr><td>D</td><td>Paraguay</td><td>3.01</td><td>29.4%</td><td>57.9%</td><td>48.9%</td><td>0.0%</td></tr><tr><td>E</td><td>Germany</td><td>1.57</td><td>85.3%</td><td>98.3%</td><td>96.0%</td><td>6.5%</td></tr><tr><td>E</td><td>Ecuador</td><td>2.27</td><td>59.3%</td><td>90.3%</td><td>82.8%</td><td>0.2%</td></tr><tr><td>E</td><td>Ivory Coast</td><td>2.43</td><td>50.2%</td><td>89.9%</td><td>79.5%</td><td>0.2%</td></tr><tr><td>E</td><td>Curaçao</td><td>3.73</td><td>5.2%</td><td>21.5%</td><td>13.4%</td><td>0.0%</td></tr><tr><td>F</td><td>Japan</td><td>1.67</td><td>84.3%</td><td>96.8%</td><td>94.9%</td><td>3.3%</td></tr><tr><td>F</td><td>Netherlands</td><td>1.83</td><td>81.3%</td><td>95.8%</td><td>92.0%</td><td>2.2%</td></tr><tr><td>F</td><td>Sweden</td><td>3.19</td><td>19.2%</td><td>56.9%</td><td>41.0%</td><td>0.0%</td></tr><tr><td>F</td><td>Tunisia</td><td>3.31</td><td>15.2%</td><td>50.5%</td><td>37.0%</td><td>0.0%</td></tr><tr><td>G</td><td>Belgium</td><td>1.89</td><td>73.3%</td><td>92.5%</td><td>89.1%</td><td>0.6%</td></tr><tr><td>G</td><td>Iran</td><td>2.15</td><td>65.0%</td><td>88.2%</td><td>82.1%</td><td>0.8%</td></tr><tr><td>G</td><td>Egypt</td><td>2.60</td><td>44.5%</td><td>77.4%</td><td>67.4%</td><td>0.1%</td></tr><tr><td>G</td><td>New Zealand</td><td>3.36</td><td>17.2%</td><td>41.9%</td><td>32.6%</td><td>0.0%</td></tr><tr><td>H</td><td>Spain</td><td>1.16</td><td>98.9%</td><td>99.9%</td><td>99.9%</td><td>32.6%</td></tr><tr><td>H</td><td>Uruguay</td><td>2.14</td><td>78.2%</td><td>95.4%</td><td>89.8%</td><td>0.6%</td></tr><tr><td>H</td><td>Saudi Arabia</td><td>3.28</td><td>13.5%</td><td>57.5%</td><td>36.7%</td><td>0.0%</td></tr><tr><td>H</td><td>Cape Verde</td><td>3.42</td><td>9.4%</td><td>47.2%</td><td>26.9%</td><td>0.0%</td></tr><tr><td>I</td><td>France</td><td>1.65</td><td>82.4%</td><td>96.7%</td><td>94.6%</td><td>10.7%</td></tr><tr><td>I</td><td>Norway</td><td>2.23</td><td>62.1%</td><td>90.3%</td><td>83.7%</td><td>1.1%</td></tr><tr><td>I</td><td>Senegal</td><td>2.46</td><td>48.2%</td><td>86.7%</td><td>76.9%</td><td>1.0%</td></tr><tr><td>I</td><td>Iraq</td><td>3.65</td><td>7.3%</td><td>26.3%</td><td>16.9%</td><td>0.0%</td></tr><tr><td>J</td><td>Argentina</td><td>1.50</td><td>88.3%</td><td>96.9%</td><td>95.8%</td><td>7.5%</td></tr><tr><td>J</td><td>Algeria</td><td>2.37</td><td>56.7%</td><td>86.6%</td><td>78.1%</td><td>0.6%</td></tr><tr><td>J</td><td>Austria</td><td>2.68</td><td>41.1%</td><td>77.3%</td><td>67.1%</td><td>0.3%</td></tr><tr><td>J</td><td>Jordan</td><td>3.45</td><td>13.9%</td><td>39.2%</td><td>29.0%</td><td>0.0%</td></tr><tr><td>K</td><td>Portugal</td><td>1.56</td><td>89.0%</td><td>96.8%</td><td>95.1%</td><td>10.6%</td></tr><tr><td>K</td><td>Colombia</td><td>1.99</td><td>74.6%</td><td>93.9%</td><td>89.4%</td><td>2.4%</td></tr><tr><td>K</td><td>Uzbekistan</td><td>3.21</td><td>17.6%</td><td>56.8%</td><td>41.0%</td><td>0.0%</td></tr><tr><td>K</td><td>DR Congo</td><td>3.24</td><td>18.8%</td><td>52.5%</td><td>37.3%</td><td>0.0%</td></tr><tr><td>L</td><td>England</td><td>1.48</td><td>90.0%</td><td>97.2%</td><td>96.4%</td><td>7.1%</td></tr><tr><td>L</td><td>Croatia</td><td>2.17</td><td>69.3%</td><td>90.2%</td><td>84.9%</td><td>0.5%</td></tr><tr><td>L</td><td>Panama</td><td>2.98</td><td>27.2%</td><td>67.2%</td><td>54.0%</td><td>0.1%</td></tr><tr><td>L</td><td>Ghana</td><td>3.38</td><td>13.5%</td><td>45.4%</td><td>32.1%</td><td>0.0%</td></tr></tbody>
+        </table>
+      </div>
+    
+
+      <h2>Most Common Final Pairings</h2>
+      
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Final Pair</th><th>Count</th><th>Probability</th></tr></thead>
+          <tbody><tr><td>Argentina vs Spain</td><td>76</td><td>7.6%</td></tr><tr><td>Portugal vs Spain</td><td>68</td><td>6.8%</td></tr><tr><td>England vs Spain</td><td>54</td><td>5.4%</td></tr><tr><td>France vs Spain</td><td>31</td><td>3.1%</td></tr><tr><td>Brazil vs Spain</td><td>28</td><td>2.8%</td></tr><tr><td>Morocco vs Spain</td><td>26</td><td>2.6%</td></tr><tr><td>Colombia vs Spain</td><td>24</td><td>2.4%</td></tr><tr><td>England vs France</td><td>21</td><td>2.1%</td></tr><tr><td>France vs Portugal</td><td>18</td><td>1.8%</td></tr><tr><td>Germany vs Spain</td><td>17</td><td>1.7%</td></tr><tr><td>France vs Germany</td><td>16</td><td>1.6%</td></tr><tr><td>Argentina vs France</td><td>15</td><td>1.5%</td></tr><tr><td>Japan vs Spain</td><td>15</td><td>1.5%</td></tr><tr><td>Brazil vs France</td><td>14</td><td>1.4%</td></tr><tr><td>Argentina vs Germany</td><td>12</td><td>1.2%</td></tr><tr><td>England vs Portugal</td><td>12</td><td>1.2%</td></tr><tr><td>Argentina vs Portugal</td><td>12</td><td>1.2%</td></tr><tr><td>Colombia vs Portugal</td><td>11</td><td>1.1%</td></tr><tr><td>Colombia vs France</td><td>11</td><td>1.1%</td></tr><tr><td>Norway vs Spain</td><td>11</td><td>1.1%</td></tr></tbody>
+        </table>
+      </div>
+    
+
+      <h2>Sample Simulated Path</h2>
+      <p class="note">This is one random path from the simulation, included for auditability. The probabilities above are calculated across all simulations.</p>
+      
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Sim</th><th>Stage</th><th>Team A</th><th>Team B</th><th>A Goals</th><th>B Goals</th><th>Winner</th><th>Method</th></tr></thead>
+          <tbody><tr><td>1</td><td>Group</td><td>Mexico</td><td>South Africa</td><td>0</td><td>0</td><td>Draw</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>South Korea</td><td>Czech Republic</td><td>3</td><td>2</td><td>South Korea</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>United States</td><td>Paraguay</td><td>0</td><td>3</td><td>Paraguay</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Canada</td><td>Bosnia and Herzegovina</td><td>1</td><td>1</td><td>Draw</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Brazil</td><td>Morocco</td><td>1</td><td>0</td><td>Brazil</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Haiti</td><td>Scotland</td><td>2</td><td>3</td><td>Scotland</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Qatar</td><td>Switzerland</td><td>1</td><td>4</td><td>Switzerland</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Australia</td><td>Turkey</td><td>1</td><td>0</td><td>Australia</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Netherlands</td><td>Japan</td><td>1</td><td>1</td><td>Draw</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Sweden</td><td>Tunisia</td><td>2</td><td>2</td><td>Draw</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Germany</td><td>Curaçao</td><td>2</td><td>0</td><td>Germany</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Ivory Coast</td><td>Ecuador</td><td>0</td><td>1</td><td>Ecuador</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Spain</td><td>Cape Verde</td><td>3</td><td>0</td><td>Spain</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Iran</td><td>New Zealand</td><td>0</td><td>2</td><td>New Zealand</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Saudi Arabia</td><td>Uruguay</td><td>0</td><td>1</td><td>Uruguay</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Belgium</td><td>Egypt</td><td>1</td><td>1</td><td>Draw</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>France</td><td>Senegal</td><td>0</td><td>0</td><td>Draw</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Iraq</td><td>Norway</td><td>1</td><td>0</td><td>Iraq</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Argentina</td><td>Algeria</td><td>0</td><td>1</td><td>Algeria</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Austria</td><td>Jordan</td><td>2</td><td>0</td><td>Austria</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>England</td><td>Croatia</td><td>1</td><td>1</td><td>Draw</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Portugal</td><td>DR Congo</td><td>6</td><td>0</td><td>Portugal</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Uzbekistan</td><td>Colombia</td><td>0</td><td>2</td><td>Colombia</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Ghana</td><td>Panama</td><td>2</td><td>0</td><td>Ghana</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Czech Republic</td><td>South Africa</td><td>3</td><td>2</td><td>Czech Republic</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Switzerland</td><td>Bosnia and Herzegovina</td><td>2</td><td>1</td><td>Switzerland</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Canada</td><td>Qatar</td><td>0</td><td>0</td><td>Draw</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Mexico</td><td>South Korea</td><td>1</td><td>1</td><td>Draw</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Scotland</td><td>Morocco</td><td>1</td><td>0</td><td>Scotland</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Brazil</td><td>Haiti</td><td>4</td><td>0</td><td>Brazil</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Turkey</td><td>Paraguay</td><td>2</td><td>3</td><td>Paraguay</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>United States</td><td>Australia</td><td>2</td><td>0</td><td>United States</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Tunisia</td><td>Japan</td><td>1</td><td>0</td><td>Tunisia</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Netherlands</td><td>Sweden</td><td>4</td><td>0</td><td>Netherlands</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Ecuador</td><td>Curaçao</td><td>5</td><td>0</td><td>Ecuador</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Germany</td><td>Ivory Coast</td><td>2</td><td>0</td><td>Germany</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Spain</td><td>Saudi Arabia</td><td>0</td><td>1</td><td>Saudi Arabia</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Belgium</td><td>Iran</td><td>4</td><td>4</td><td>Draw</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Uruguay</td><td>Cape Verde</td><td>1</td><td>0</td><td>Uruguay</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>New Zealand</td><td>Egypt</td><td>1</td><td>0</td><td>New Zealand</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Argentina</td><td>Austria</td><td>1</td><td>0</td><td>Argentina</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Norway</td><td>Senegal</td><td>1</td><td>3</td><td>Senegal</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>France</td><td>Iraq</td><td>0</td><td>0</td><td>Draw</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Jordan</td><td>Algeria</td><td>0</td><td>1</td><td>Algeria</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>England</td><td>Ghana</td><td>0</td><td>0</td><td>Draw</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Portugal</td><td>Uzbekistan</td><td>0</td><td>0</td><td>Draw</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Panama</td><td>Croatia</td><td>0</td><td>2</td><td>Croatia</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Colombia</td><td>DR Congo</td><td>0</td><td>1</td><td>DR Congo</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Morocco</td><td>Haiti</td><td>3</td><td>0</td><td>Morocco</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>South Africa</td><td>South Korea</td><td>3</td><td>1</td><td>South Africa</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Mexico</td><td>Czech Republic</td><td>3</td><td>1</td><td>Mexico</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Scotland</td><td>Brazil</td><td>1</td><td>3</td><td>Brazil</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Bosnia and Herzegovina</td><td>Qatar</td><td>0</td><td>3</td><td>Qatar</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Canada</td><td>Switzerland</td><td>1</td><td>0</td><td>Canada</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Japan</td><td>Sweden</td><td>3</td><td>1</td><td>Japan</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Ecuador</td><td>Germany</td><td>3</td><td>1</td><td>Ecuador</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>United States</td><td>Turkey</td><td>1</td><td>1</td><td>Draw</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Tunisia</td><td>Netherlands</td><td>1</td><td>3</td><td>Netherlands</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Curaçao</td><td>Ivory Coast</td><td>1</td><td>1</td><td>Draw</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Paraguay</td><td>Australia</td><td>2</td><td>2</td><td>Draw</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Norway</td><td>France</td><td>0</td><td>2</td><td>France</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Cape Verde</td><td>Saudi Arabia</td><td>0</td><td>1</td><td>Saudi Arabia</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Egypt</td><td>Iran</td><td>0</td><td>0</td><td>Draw</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Senegal</td><td>Iraq</td><td>2</td><td>0</td><td>Senegal</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>New Zealand</td><td>Belgium</td><td>1</td><td>1</td><td>Draw</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Uruguay</td><td>Spain</td><td>1</td><td>3</td><td>Spain</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Jordan</td><td>Argentina</td><td>2</td><td>2</td><td>Draw</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>DR Congo</td><td>Uzbekistan</td><td>2</td><td>1</td><td>DR Congo</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Panama</td><td>England</td><td>0</td><td>2</td><td>England</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Algeria</td><td>Austria</td><td>4</td><td>2</td><td>Algeria</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Colombia</td><td>Portugal</td><td>1</td><td>5</td><td>Portugal</td><td>nan</td></tr><tr><td>1</td><td>Group</td><td>Croatia</td><td>Ghana</td><td>2</td><td>0</td><td>Croatia</td><td>nan</td></tr><tr><td>1</td><td>Round of 32</td><td>South Africa</td><td>Canada</td><td>0</td><td>1</td><td>Canada</td><td>90</td></tr><tr><td>1</td><td>Round of 32</td><td>Ecuador</td><td>Qatar</td><td>1</td><td>1</td><td>Ecuador</td><td>ET</td></tr><tr><td>1</td><td>Round of 32</td><td>Netherlands</td><td>Scotland</td><td>2</td><td>0</td><td>Netherlands</td><td>90</td></tr><tr><td>1</td><td>Round of 32</td><td>Brazil</td><td>Japan</td><td>0</td><td>1</td><td>Japan</td><td>90</td></tr><tr><td>1</td><td>Round of 32</td><td>Senegal</td><td>Uruguay</td><td>0</td><td>1</td><td>Uruguay</td><td>90</td></tr><tr><td>1</td><td>Round of 32</td><td>Germany</td><td>France</td><td>0</td><td>2</td><td>France</td><td>90</td></tr><tr><td>1</td><td>Round of 32</td><td>Mexico</td><td>Tunisia</td><td>0</td><td>2</td><td>Tunisia</td><td>90</td></tr><tr><td>1</td><td>Round of 32</td><td>Croatia</td><td>Iraq</td><td>0</td><td>1</td><td>Iraq</td><td>90</td></tr><tr><td>1</td><td>Round of 32</td><td>Paraguay</td><td>Ghana</td><td>3</td><td>1</td><td>Paraguay</td><td>90</td></tr><tr><td>1</td><td>Round of 32</td><td>New Zealand</td><td>South Korea</td><td>1</td><td>2</td><td>South Korea</td><td>90</td></tr><tr><td>1</td><td>Round of 32</td><td>DR Congo</td><td>England</td><td>0</td><td>3</td><td>England</td><td>90</td></tr><tr><td>1</td><td>Round of 32</td><td>Spain</td><td>Argentina</td><td>3</td><td>0</td><td>Spain</td><td>90</td></tr><tr><td>1</td><td>Round of 32</td><td>Switzerland</td><td>United States</td><td>0</td><td>0</td><td>Switzerland</td><td>ET</td></tr><tr><td>1</td><td>Round of 32</td><td>Algeria</td><td>Saudi Arabia</td><td>0</td><td>0</td><td>Algeria</td><td>ET</td></tr><tr><td>1</td><td>Round of 32</td><td>Portugal</td><td>Morocco</td><td>2</td><td>0</td><td>Portugal</td><td>90</td></tr><tr><td>1</td><td>Round of 32</td><td>Australia</td><td>Belgium</td><td>1</td><td>0</td><td>Australia</td><td>90</td></tr><tr><td>1</td><td>Round of 16</td><td>Canada</td><td>Netherlands</td><td>0</td><td>5</td><td>Netherlands</td><td>90</td></tr><tr><td>1</td><td>Round of 16</td><td>Ecuador</td><td>Uruguay</td><td>0</td><td>2</td><td>Uruguay</td><td>90</td></tr><tr><td>1</td><td>Round of 16</td><td>Japan</td><td>France</td><td>2</td><td>2</td><td>Japan</td><td>ET</td></tr><tr><td>1</td><td>Round of 16</td><td>Tunisia</td><td>Iraq</td><td>0</td><td>0</td><td>Tunisia</td><td>ET</td></tr><tr><td>1</td><td>Round of 16</td><td>England</td><td>Spain</td><td>0</td><td>1</td><td>Spain</td><td>90</td></tr><tr><td>1</td><td>Round of 16</td><td>Paraguay</td><td>South Korea</td><td>2</td><td>2</td><td>Paraguay</td><td>PEN</td></tr><tr><td>1</td><td>Round of 16</td><td>Algeria</td><td>Australia</td><td>1</td><td>3</td><td>Australia</td><td>90</td></tr><tr><td>1</td><td>Round of 16</td><td>Switzerland</td><td>Portugal</td><td>1</td><td>1</td><td>Switzerland</td><td>ET</td></tr></tbody>
+        </table>
+      </div>
+    
     </section>
 
-    <section class="toolbar">
-      <h2>Match Cards</h2>
-      <div class="filters" aria-label="Confidence filters">
-        <button class="active" data-filter="all">All</button>
-        <button data-filter="strong">Strong</button>
-        <button data-filter="lean">Lean</button>
-        <button data-filter="tossup">Tossups</button>
+    <section id="v2" class="tab-panel">
+      <div class="placeholder">
+        <h2>V2: After Round 1</h2>
+        <p>This tab is reserved for the next forecast version. Once every team has played its first group match, V2 will replace those simulated Round 1 results with actual outcomes, update group-local states, and rerun the remaining tournament tree.</p>
       </div>
     </section>
 
-    <section class="matches" id="matches">
+    <section id="v3" class="tab-panel">
+      <div class="placeholder">
+        <h2>V3: After Rounds 1-2</h2>
+        <p>This tab is reserved for the forecast after each team has played twice. V3 will use actual Round 1 and Round 2 outcomes to update standings, third-place qualification, and the projected knockout paths.</p>
+      </div>
+    </section>
+
+    <section id="methodology" class="tab-panel">
+      <h2>Methodology</h2>
+      <div class="method-grid">
+        <article class="method-card"><h3>1. Start With Priors</h3><p>The model starts with recency-weighted international Elo, tournament weights, host advantage, confederation adjustments, capped Transfermarkt squad market-value adjustments, and available betting priors.</p></article>
+        <article class="method-card"><h3>2. Sample Scorelines</h3><p>Each match uses a low-score-adjusted Poisson scoreline model. This produces a full distribution over scores, not just win/draw/loss probabilities.</p></article>
+        <article class="method-card"><h3>3. Update State Sequentially</h3><p>After each sampled scoreline, the model updates team ratings and group standings before the next match in that simulated tournament.</p></article>
+        <article class="method-card"><h3>4. Build The Bracket</h3><p>After group play, the model ranks groups, assigns top-two and best third-place qualifiers, then simulates knockout matches round by round.</p></article>
+        <article class="method-card"><h3>5. Repeat Many Times</h3><p>Each simulation produces one possible tournament. Stage and champion probabilities are simply the share of simulations where each team reaches that stage.</p></article>
+        <article class="method-card"><h3>6. Version Causally</h3><p>V1 uses no actual World Cup results. V2 will use actual Round 1 results only after all Round 1 games are complete. V3 will use actual Rounds 1 and 2.</p></article>
+      </div>
       
-      <article class="match-card strong" data-confidence="strong" data-day="2026-06-11">
-        <div class="match-topline">
-          <span>2026-06-11</span>
-          <span>Mexico City, Mexico</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">MEX</span>
-            <span class="team-name">Mexico</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">South Africa</span>
-            <span class="badge away">SA</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:71.74%"></span>
-          <span class="draw" style="width:20.14%"></span>
-          <span class="away" style="width:8.12%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Mexico</span><strong>71.7%</strong></div>
-          <div><span>Draw</span><strong>20.1%</strong></div>
-          <div><span>South Africa</span><strong>8.1%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>Mexico</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>2.03 - 0.52</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>1-0</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card lean" data-confidence="lean" data-day="2026-06-11">
-        <div class="match-topline">
-          <span>2026-06-11</span>
-          <span>Zapopan, Mexico</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">SK</span>
-            <span class="team-name">South Korea</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Czech Republic</span>
-            <span class="badge away">CR</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:53.36%"></span>
-          <span class="draw" style="width:25.30%"></span>
-          <span class="away" style="width:21.34%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>South Korea</span><strong>53.4%</strong></div>
-          <div><span>Draw</span><strong>25.3%</strong></div>
-          <div><span>Czech Republic</span><strong>21.3%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>South Korea</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>1.62 - 0.93</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>1-0</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card lean" data-confidence="lean" data-day="2026-06-12">
-        <div class="match-topline">
-          <span>2026-06-12</span>
-          <span>Inglewood, United States</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">US</span>
-            <span class="team-name">United States</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Paraguay</span>
-            <span class="badge away">PAR</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:56.13%"></span>
-          <span class="draw" style="width:24.76%"></span>
-          <span class="away" style="width:19.11%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>United States</span><strong>56.1%</strong></div>
-          <div><span>Draw</span><strong>24.8%</strong></div>
-          <div><span>Paraguay</span><strong>19.1%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>United States</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>1.68 - 0.87</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>1-0</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card strong" data-confidence="strong" data-day="2026-06-12">
-        <div class="match-topline">
-          <span>2026-06-12</span>
-          <span>Toronto, Canada</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">CAN</span>
-            <span class="team-name">Canada</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Bosnia and Herzegovina</span>
-            <span class="badge away">BAH</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:69.67%"></span>
-          <span class="draw" style="width:20.92%"></span>
-          <span class="away" style="width:9.42%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Canada</span><strong>69.7%</strong></div>
-          <div><span>Draw</span><strong>20.9%</strong></div>
-          <div><span>Bosnia and Herzegovina</span><strong>9.4%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>Canada</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>1.98 - 0.57</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>1-0</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card tossup" data-confidence="tossup" data-day="2026-06-13">
-        <div class="match-topline">
-          <span>2026-06-13</span>
-          <span>East Rutherford, United States</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">BRA</span>
-            <span class="team-name">Brazil</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Morocco</span>
-            <span class="badge away">MOR</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:35.68%"></span>
-          <span class="draw" style="width:26.84%"></span>
-          <span class="away" style="width:37.48%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Brazil</span><strong>35.7%</strong></div>
-          <div><span>Draw</span><strong>26.8%</strong></div>
-          <div><span>Morocco</span><strong>37.5%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>Morocco</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>1.26 - 1.29</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>1-1</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card tossup" data-confidence="tossup" data-day="2026-06-13">
-        <div class="match-topline">
-          <span>2026-06-13</span>
-          <span>Foxborough, United States</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">HAI</span>
-            <span class="team-name">Haiti</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Scotland</span>
-            <span class="badge away">SCO</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:25.50%"></span>
-          <span class="draw" style="width:26.06%"></span>
-          <span class="away" style="width:48.44%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Haiti</span><strong>25.5%</strong></div>
-          <div><span>Draw</span><strong>26.1%</strong></div>
-          <div><span>Scotland</span><strong>48.4%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>Scotland</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>1.03 - 1.52</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>1-1</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card strong" data-confidence="strong" data-day="2026-06-13">
-        <div class="match-topline">
-          <span>2026-06-13</span>
-          <span>Santa Clara, United States</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">QAT</span>
-            <span class="team-name">Qatar</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Switzerland</span>
-            <span class="badge away">SWI</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:9.29%"></span>
-          <span class="draw" style="width:20.85%"></span>
-          <span class="away" style="width:69.86%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Qatar</span><strong>9.3%</strong></div>
-          <div><span>Draw</span><strong>20.8%</strong></div>
-          <div><span>Switzerland</span><strong>69.9%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>Switzerland</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>0.56 - 1.99</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>0-1</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card tossup" data-confidence="tossup" data-day="2026-06-13">
-        <div class="match-topline">
-          <span>2026-06-13</span>
-          <span>Vancouver, Canada</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">AUS</span>
-            <span class="team-name">Australia</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Turkey</span>
-            <span class="badge away">TUR</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:28.55%"></span>
-          <span class="draw" style="width:26.45%"></span>
-          <span class="away" style="width:45.01%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Australia</span><strong>28.5%</strong></div>
-          <div><span>Draw</span><strong>26.4%</strong></div>
-          <div><span>Turkey</span><strong>45.0%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>Turkey</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>1.10 - 1.45</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>1-1</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card tossup" data-confidence="tossup" data-day="2026-06-14">
-        <div class="match-topline">
-          <span>2026-06-14</span>
-          <span>Arlington, United States</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">NET</span>
-            <span class="team-name">Netherlands</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Japan</span>
-            <span class="badge away">JAP</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:33.92%"></span>
-          <span class="draw" style="width:26.80%"></span>
-          <span class="away" style="width:39.28%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Netherlands</span><strong>33.9%</strong></div>
-          <div><span>Draw</span><strong>26.8%</strong></div>
-          <div><span>Japan</span><strong>39.3%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>Japan</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>1.22 - 1.33</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>1-1</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card tossup" data-confidence="tossup" data-day="2026-06-14">
-        <div class="match-topline">
-          <span>2026-06-14</span>
-          <span>Guadalupe, Mexico</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">SWE</span>
-            <span class="team-name">Sweden</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Tunisia</span>
-            <span class="badge away">TUN</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:39.24%"></span>
-          <span class="draw" style="width:26.81%"></span>
-          <span class="away" style="width:33.96%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Sweden</span><strong>39.2%</strong></div>
-          <div><span>Draw</span><strong>26.8%</strong></div>
-          <div><span>Tunisia</span><strong>34.0%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>Sweden</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>1.33 - 1.22</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>1-1</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card strong" data-confidence="strong" data-day="2026-06-14">
-        <div class="match-topline">
-          <span>2026-06-14</span>
-          <span>Houston, United States</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">GER</span>
-            <span class="team-name">Germany</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Curaçao</span>
-            <span class="badge away">CUR</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:78.85%"></span>
-          <span class="draw" style="width:17.03%"></span>
-          <span class="away" style="width:4.12%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Germany</span><strong>78.8%</strong></div>
-          <div><span>Draw</span><strong>17.0%</strong></div>
-          <div><span>Curaçao</span><strong>4.1%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>Germany</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>2.22 - 0.33</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>2-0</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card tossup" data-confidence="tossup" data-day="2026-06-14">
-        <div class="match-topline">
-          <span>2026-06-14</span>
-          <span>Philadelphia, United States</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">IC</span>
-            <span class="team-name">Ivory Coast</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Ecuador</span>
-            <span class="badge away">ECU</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:33.81%"></span>
-          <span class="draw" style="width:26.80%"></span>
-          <span class="away" style="width:39.39%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Ivory Coast</span><strong>33.8%</strong></div>
-          <div><span>Draw</span><strong>26.8%</strong></div>
-          <div><span>Ecuador</span><strong>39.4%</strong></div>
-        </div>
-        <div class="card-footer">
+      <section class="example">
+        <h3>Worked Example: Mexico vs South Africa</h3>
+        <div class="example-grid">
           <div>
-            <span class="footer-label">Pick</span>
-            <strong>Ecuador</strong>
+            <span>Base Elo</span>
+            <strong>Mexico 1784.0 · South Africa 1613.7</strong>
+            <p>Ratings come from completed international matches before the tournament cutoff, with recent competitive matches weighted more heavily.</p>
           </div>
           <div>
-            <span class="footer-label">xG</span>
-            <strong>1.22 - 1.33</strong>
+            <span>Context Priors</span>
+            <strong>Host +70 · Confed -10/-2</strong>
+            <p>Mexico receives host advantage. Both teams also receive modest confederation adjustments.</p>
           </div>
           <div>
-            <span class="footer-label">Mode</span>
-            <strong>1-1</strong>
+            <span>Market Inputs</span>
+            <strong>Squad adj -0.4/-18.0</strong>
+            <p>Transfermarkt squad market values are capped so they act as a small prior, not the main model driver.</p>
           </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card strong" data-confidence="strong" data-day="2026-06-15">
-        <div class="match-topline">
-          <span>2026-06-15</span>
-          <span>Atlanta, United States</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">SPA</span>
-            <span class="team-name">Spain</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Cape Verde</span>
-            <span class="badge away">CV</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:83.85%"></span>
-          <span class="draw" style="width:14.33%"></span>
-          <span class="away" style="width:1.82%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Spain</span><strong>83.8%</strong></div>
-          <div><span>Draw</span><strong>14.3%</strong></div>
-          <div><span>Cape Verde</span><strong>1.8%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>Spain</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>2.39 - 0.18</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>2-0</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card lean" data-confidence="lean" data-day="2026-06-15">
-        <div class="match-topline">
-          <span>2026-06-15</span>
-          <span>Inglewood, United States</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">IRA</span>
-            <span class="team-name">Iran</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">New Zealand</span>
-            <span class="badge away">NZ</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:60.40%"></span>
-          <span class="draw" style="width:23.77%"></span>
-          <span class="away" style="width:15.83%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Iran</span><strong>60.4%</strong></div>
-          <div><span>Draw</span><strong>23.8%</strong></div>
-          <div><span>New Zealand</span><strong>15.8%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>Iran</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>1.77 - 0.78</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>1-0</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card strong" data-confidence="strong" data-day="2026-06-15">
-        <div class="match-topline">
-          <span>2026-06-15</span>
-          <span>Miami Gardens, United States</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">SA</span>
-            <span class="team-name">Saudi Arabia</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Uruguay</span>
-            <span class="badge away">URU</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:11.44%"></span>
-          <span class="draw" style="width:21.98%"></span>
-          <span class="away" style="width:66.58%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Saudi Arabia</span><strong>11.4%</strong></div>
-          <div><span>Draw</span><strong>22.0%</strong></div>
-          <div><span>Uruguay</span><strong>66.6%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>Uruguay</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>0.64 - 1.91</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>0-1</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card lean" data-confidence="lean" data-day="2026-06-15">
-        <div class="match-topline">
-          <span>2026-06-15</span>
-          <span>Seattle, United States</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">BEL</span>
-            <span class="team-name">Belgium</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Egypt</span>
-            <span class="badge away">EGY</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:51.24%"></span>
-          <span class="draw" style="width:25.66%"></span>
-          <span class="away" style="width:23.10%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Belgium</span><strong>51.2%</strong></div>
-          <div><span>Draw</span><strong>25.7%</strong></div>
-          <div><span>Egypt</span><strong>23.1%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>Belgium</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>1.58 - 0.97</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>1-1</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card lean" data-confidence="lean" data-day="2026-06-16">
-        <div class="match-topline">
-          <span>2026-06-16</span>
-          <span>East Rutherford, United States</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">FRA</span>
-            <span class="team-name">France</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Senegal</span>
-            <span class="badge away">SEN</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:56.55%"></span>
-          <span class="draw" style="width:24.67%"></span>
-          <span class="away" style="width:18.78%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>France</span><strong>56.5%</strong></div>
-          <div><span>Draw</span><strong>24.7%</strong></div>
-          <div><span>Senegal</span><strong>18.8%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>France</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>1.69 - 0.86</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>1-0</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card strong" data-confidence="strong" data-day="2026-06-16">
-        <div class="match-topline">
-          <span>2026-06-16</span>
-          <span>Foxborough, United States</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">IRA</span>
-            <span class="team-name">Iraq</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Norway</span>
-            <span class="badge away">NOR</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:10.35%"></span>
-          <span class="draw" style="width:21.43%"></span>
-          <span class="away" style="width:68.22%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Iraq</span><strong>10.4%</strong></div>
-          <div><span>Draw</span><strong>21.4%</strong></div>
-          <div><span>Norway</span><strong>68.2%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>Norway</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>0.60 - 1.95</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>0-1</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card lean" data-confidence="lean" data-day="2026-06-16">
-        <div class="match-topline">
-          <span>2026-06-16</span>
-          <span>Kansas City, United States</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">ARG</span>
-            <span class="team-name">Argentina</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Algeria</span>
-            <span class="badge away">ALG</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:57.61%"></span>
-          <span class="draw" style="width:24.44%"></span>
-          <span class="away" style="width:17.95%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Argentina</span><strong>57.6%</strong></div>
-          <div><span>Draw</span><strong>24.4%</strong></div>
-          <div><span>Algeria</span><strong>17.9%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>Argentina</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>1.71 - 0.84</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>1-0</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card lean" data-confidence="lean" data-day="2026-06-16">
-        <div class="match-topline">
-          <span>2026-06-16</span>
-          <span>Santa Clara, United States</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">AUS</span>
-            <span class="team-name">Austria</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Jordan</span>
-            <span class="badge away">JOR</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:55.46%"></span>
-          <span class="draw" style="width:24.90%"></span>
-          <span class="away" style="width:19.64%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Austria</span><strong>55.5%</strong></div>
-          <div><span>Draw</span><strong>24.9%</strong></div>
-          <div><span>Jordan</span><strong>19.6%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>Austria</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>1.67 - 0.88</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>1-0</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card lean" data-confidence="lean" data-day="2026-06-17">
-        <div class="match-topline">
-          <span>2026-06-17</span>
-          <span>Arlington, United States</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">ENG</span>
-            <span class="team-name">England</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Croatia</span>
-            <span class="badge away">CRO</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:54.03%"></span>
-          <span class="draw" style="width:25.18%"></span>
-          <span class="away" style="width:20.79%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>England</span><strong>54.0%</strong></div>
-          <div><span>Draw</span><strong>25.2%</strong></div>
-          <div><span>Croatia</span><strong>20.8%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>England</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>1.64 - 0.91</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>1-0</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card strong" data-confidence="strong" data-day="2026-06-17">
-        <div class="match-topline">
-          <span>2026-06-17</span>
-          <span>Houston, United States</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">POR</span>
-            <span class="team-name">Portugal</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">DR Congo</span>
-            <span class="badge away">DC</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:71.65%"></span>
-          <span class="draw" style="width:20.17%"></span>
-          <span class="away" style="width:8.17%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Portugal</span><strong>71.7%</strong></div>
-          <div><span>Draw</span><strong>20.2%</strong></div>
-          <div><span>DR Congo</span><strong>8.2%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>Portugal</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>2.03 - 0.52</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>1-0</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card lean" data-confidence="lean" data-day="2026-06-17">
-        <div class="match-topline">
-          <span>2026-06-17</span>
-          <span>Mexico City, Mexico</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">UZB</span>
-            <span class="team-name">Uzbekistan</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Colombia</span>
-            <span class="badge away">COL</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:13.45%"></span>
-          <span class="draw" style="width:22.87%"></span>
-          <span class="away" style="width:63.68%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Uzbekistan</span><strong>13.5%</strong></div>
-          <div><span>Draw</span><strong>22.9%</strong></div>
-          <div><span>Colombia</span><strong>63.7%</strong></div>
-        </div>
-        <div class="card-footer">
-          <div>
-            <span class="footer-label">Pick</span>
-            <strong>Colombia</strong>
-          </div>
-          <div>
-            <span class="footer-label">xG</span>
-            <strong>0.70 - 1.85</strong>
-          </div>
-          <div>
-            <span class="footer-label">Mode</span>
-            <strong>0-1</strong>
-          </div>
-        </div>
-      </article>
-    
-
-      <article class="match-card tossup" data-confidence="tossup" data-day="2026-06-17">
-        <div class="match-topline">
-          <span>2026-06-17</span>
-          <span>Toronto, Canada</span>
-        </div>
-        <div class="teams">
-          <div class="team">
-            <span class="badge">GHA</span>
-            <span class="team-name">Ghana</span>
-          </div>
-          <span class="versus">vs</span>
-          <div class="team away-team">
-            <span class="team-name">Panama</span>
-            <span class="badge away">PAN</span>
-          </div>
-        </div>
-        
-        <div class="probbar" aria-label="Probability bar">
-          <span class="home" style="width:26.07%"></span>
-          <span class="draw" style="width:26.15%"></span>
-          <span class="away" style="width:47.79%"></span>
-        </div>
-    
-        <div class="prob-grid">
-          <div><span>Ghana</span><strong>26.1%</strong></div>
-          <div><span>Draw</span><strong>26.1%</strong></div>
-          <div><span>Panama</span><strong>47.8%</strong></div>
-        </div>
-        <div class="card-footer">
           <div>
-            <span class="footer-label">Pick</span>
-            <strong>Panama</strong>
+            <span>Final Ratings</span>
+            <strong>Mexico 1843.7 · South Africa 1593.7</strong>
+            <p>Base Elo plus context, market value, and betting priors produce the ratings used for the match probability.</p>
           </div>
           <div>
-            <span class="footer-label">xG</span>
-            <strong>1.04 - 1.51</strong>
+            <span>Attack/Defense Form</span>
+            <strong>Attack z -0.61/-0.29</strong>
+            <p>Recent scoring and defending residuals adjust expected goals relative to rating-based expectation.</p>
           </div>
           <div>
-            <span class="footer-label">Mode</span>
-            <strong>1-1</strong>
+            <span>Match Probability</span>
+            <strong>71.7% / 20.1% / 8.1%</strong>
+            <p>Expected goals are 2.0-0.5. The simulation samples scorelines from this distribution.</p>
           </div>
         </div>
-      </article>
+        <p class="callout">In the Monte Carlo tree, a sampled Mexico-South Africa score updates both teams' ratings before their next simulated group match. Across 1,000 simulations, this creates a distribution of tournament paths rather than one fixed bracket.</p>
+      </section>
     
     </section>
-
-    <div class="legend" aria-label="Probability legend">
-      <span class="key"><span class="swatch home"></span> Home win</span>
-      <span class="key"><span class="swatch draw"></span> Draw</span>
-      <span class="key"><span class="swatch away"></span> Away win</span>
-    </div>
-
-    <section class="table-wrap" aria-label="Prediction table">
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Fixture</th>
-            <th>Pick</th>
-            <th>Home</th>
-            <th>Draw</th>
-            <th>Away</th>
-            <th>xG</th>
-            <th>Mode</th>
-            <th>Market edge</th>
-          </tr>
-        </thead>
-        <tbody>
-          
-      <tr data-confidence="strong">
-        <td>2026-06-11</td>
-        <td><strong>Mexico</strong> vs <strong>South Africa</strong><span>Mexico City</span></td>
-        <td>Mexico</td>
-        <td>71.7%</td>
-        <td>20.1%</td>
-        <td>8.1%</td>
-        <td>2.03 - 0.52</td>
-        <td>1-0</td>
-        <td>Mexico 17.6</td>
-      </tr>
-    
-
-      <tr data-confidence="lean">
-        <td>2026-06-11</td>
-        <td><strong>South Korea</strong> vs <strong>Czech Republic</strong><span>Zapopan</span></td>
-        <td>South Korea</td>
-        <td>53.4%</td>
-        <td>25.3%</td>
-        <td>21.3%</td>
-        <td>1.62 - 0.93</td>
-        <td>1-0</td>
-        <td>Czech Republic 4.5</td>
-      </tr>
-    
-
-      <tr data-confidence="lean">
-        <td>2026-06-12</td>
-        <td><strong>United States</strong> vs <strong>Paraguay</strong><span>Inglewood</span></td>
-        <td>United States</td>
-        <td>56.1%</td>
-        <td>24.8%</td>
-        <td>19.1%</td>
-        <td>1.68 - 0.87</td>
-        <td>1-0</td>
-        <td>United States 28.3</td>
-      </tr>
-    
-
-      <tr data-confidence="strong">
-        <td>2026-06-12</td>
-        <td><strong>Canada</strong> vs <strong>Bosnia and Herzegovina</strong><span>Toronto</span></td>
-        <td>Canada</td>
-        <td>69.7%</td>
-        <td>20.9%</td>
-        <td>9.4%</td>
-        <td>1.98 - 0.57</td>
-        <td>1-0</td>
-        <td>Canada 4.0</td>
-      </tr>
-    
-
-      <tr data-confidence="tossup">
-        <td>2026-06-13</td>
-        <td><strong>Brazil</strong> vs <strong>Morocco</strong><span>East Rutherford</span></td>
-        <td>Morocco</td>
-        <td>35.7%</td>
-        <td>26.8%</td>
-        <td>37.5%</td>
-        <td>1.26 - 1.29</td>
-        <td>1-1</td>
-        <td>Brazil 20.6</td>
-      </tr>
-    
-
-      <tr data-confidence="tossup">
-        <td>2026-06-13</td>
-        <td><strong>Haiti</strong> vs <strong>Scotland</strong><span>Foxborough</span></td>
-        <td>Scotland</td>
-        <td>25.5%</td>
-        <td>26.1%</td>
-        <td>48.4%</td>
-        <td>1.03 - 1.52</td>
-        <td>1-1</td>
-        <td>Scotland 37.6</td>
-      </tr>
-    
-
-      <tr data-confidence="strong">
-        <td>2026-06-13</td>
-        <td><strong>Qatar</strong> vs <strong>Switzerland</strong><span>Santa Clara</span></td>
-        <td>Switzerland</td>
-        <td>9.3%</td>
-        <td>20.8%</td>
-        <td>69.9%</td>
-        <td>0.56 - 1.99</td>
-        <td>0-1</td>
-        <td>Switzerland 25.8</td>
-      </tr>
-    
-
-      <tr data-confidence="tossup">
-        <td>2026-06-13</td>
-        <td><strong>Australia</strong> vs <strong>Turkey</strong><span>Vancouver</span></td>
-        <td>Turkey</td>
-        <td>28.5%</td>
-        <td>26.4%</td>
-        <td>45.0%</td>
-        <td>1.10 - 1.45</td>
-        <td>1-1</td>
-        <td>Turkey 50.5</td>
-      </tr>
-    
-
-      <tr data-confidence="tossup">
-        <td>2026-06-14</td>
-        <td><strong>Netherlands</strong> vs <strong>Japan</strong><span>Arlington</span></td>
-        <td>Japan</td>
-        <td>33.9%</td>
-        <td>26.8%</td>
-        <td>39.3%</td>
-        <td>1.22 - 1.33</td>
-        <td>1-1</td>
-        <td>Netherlands 13.3</td>
-      </tr>
-    
-
-      <tr data-confidence="tossup">
-        <td>2026-06-14</td>
-        <td><strong>Sweden</strong> vs <strong>Tunisia</strong><span>Guadalupe</span></td>
-        <td>Sweden</td>
-        <td>39.2%</td>
-        <td>26.8%</td>
-        <td>34.0%</td>
-        <td>1.33 - 1.22</td>
-        <td>1-1</td>
-        <td>Sweden 26.1</td>
-      </tr>
-    
-
-      <tr data-confidence="strong">
-        <td>2026-06-14</td>
-        <td><strong>Germany</strong> vs <strong>Curaçao</strong><span>Houston</span></td>
-        <td>Germany</td>
-        <td>78.8%</td>
-        <td>17.0%</td>
-        <td>4.1%</td>
-        <td>2.22 - 0.33</td>
-        <td>2-0</td>
-        <td>Germany 92.0</td>
-      </tr>
-    
-
-      <tr data-confidence="tossup">
-        <td>2026-06-14</td>
-        <td><strong>Ivory Coast</strong> vs <strong>Ecuador</strong><span>Philadelphia</span></td>
-        <td>Ecuador</td>
-        <td>33.8%</td>
-        <td>26.8%</td>
-        <td>39.4%</td>
-        <td>1.22 - 1.33</td>
-        <td>1-1</td>
-        <td>Ecuador 3.7</td>
-      </tr>
-    
-
-      <tr data-confidence="strong">
-        <td>2026-06-15</td>
-        <td><strong>Spain</strong> vs <strong>Cape Verde</strong><span>Atlanta</span></td>
-        <td>Spain</td>
-        <td>83.8%</td>
-        <td>14.3%</td>
-        <td>1.8%</td>
-        <td>2.39 - 0.18</td>
-        <td>2-0</td>
-        <td>Spain 92.0</td>
-      </tr>
-    
-
-      <tr data-confidence="lean">
-        <td>2026-06-15</td>
-        <td><strong>Iran</strong> vs <strong>New Zealand</strong><span>Inglewood</span></td>
-        <td>Iran</td>
-        <td>60.4%</td>
-        <td>23.8%</td>
-        <td>15.8%</td>
-        <td>1.77 - 0.78</td>
-        <td>1-0</td>
-        <td>Iran 0.0</td>
-      </tr>
-    
-
-      <tr data-confidence="strong">
-        <td>2026-06-15</td>
-        <td><strong>Saudi Arabia</strong> vs <strong>Uruguay</strong><span>Miami Gardens</span></td>
-        <td>Uruguay</td>
-        <td>11.4%</td>
-        <td>22.0%</td>
-        <td>66.6%</td>
-        <td>0.64 - 1.91</td>
-        <td>0-1</td>
-        <td>Uruguay 63.3</td>
-      </tr>
-    
-
-      <tr data-confidence="lean">
-        <td>2026-06-15</td>
-        <td><strong>Belgium</strong> vs <strong>Egypt</strong><span>Seattle</span></td>
-        <td>Belgium</td>
-        <td>51.2%</td>
-        <td>25.7%</td>
-        <td>23.1%</td>
-        <td>1.58 - 0.97</td>
-        <td>1-1</td>
-        <td>Belgium 22.9</td>
-      </tr>
-    
-
-      <tr data-confidence="lean">
-        <td>2026-06-16</td>
-        <td><strong>France</strong> vs <strong>Senegal</strong><span>East Rutherford</span></td>
-        <td>France</td>
-        <td>56.5%</td>
-        <td>24.7%</td>
-        <td>18.8%</td>
-        <td>1.69 - 0.86</td>
-        <td>1-0</td>
-        <td>France 33.9</td>
-      </tr>
-    
-
-      <tr data-confidence="strong">
-        <td>2026-06-16</td>
-        <td><strong>Iraq</strong> vs <strong>Norway</strong><span>Foxborough</span></td>
-        <td>Norway</td>
-        <td>10.4%</td>
-        <td>21.4%</td>
-        <td>68.2%</td>
-        <td>0.60 - 1.95</td>
-        <td>0-1</td>
-        <td>Norway 77.5</td>
-      </tr>
-    
-
-      <tr data-confidence="lean">
-        <td>2026-06-16</td>
-        <td><strong>Argentina</strong> vs <strong>Algeria</strong><span>Kansas City</span></td>
-        <td>Argentina</td>
-        <td>57.6%</td>
-        <td>24.4%</td>
-        <td>17.9%</td>
-        <td>1.71 - 0.84</td>
-        <td>1-0</td>
-        <td>Argentina 16.3</td>
-      </tr>
-    
-
-      <tr data-confidence="lean">
-        <td>2026-06-16</td>
-        <td><strong>Austria</strong> vs <strong>Jordan</strong><span>Santa Clara</span></td>
-        <td>Austria</td>
-        <td>55.5%</td>
-        <td>24.9%</td>
-        <td>19.6%</td>
-        <td>1.67 - 0.88</td>
-        <td>1-0</td>
-        <td>Austria 60.0</td>
-      </tr>
-    
-
-      <tr data-confidence="lean">
-        <td>2026-06-17</td>
-        <td><strong>England</strong> vs <strong>Croatia</strong><span>Arlington</span></td>
-        <td>England</td>
-        <td>54.0%</td>
-        <td>25.2%</td>
-        <td>20.8%</td>
-        <td>1.64 - 0.91</td>
-        <td>1-0</td>
-        <td>England 8.0</td>
-      </tr>
-    
-
-      <tr data-confidence="strong">
-        <td>2026-06-17</td>
-        <td><strong>Portugal</strong> vs <strong>DR Congo</strong><span>Houston</span></td>
-        <td>Portugal</td>
-        <td>71.7%</td>
-        <td>20.2%</td>
-        <td>8.2%</td>
-        <td>2.03 - 0.52</td>
-        <td>1-0</td>
-        <td>Portugal 63.0</td>
-      </tr>
-    
-
-      <tr data-confidence="lean">
-        <td>2026-06-17</td>
-        <td><strong>Uzbekistan</strong> vs <strong>Colombia</strong><span>Mexico City</span></td>
-        <td>Colombia</td>
-        <td>13.5%</td>
-        <td>22.9%</td>
-        <td>63.7%</td>
-        <td>0.70 - 1.85</td>
-        <td>0-1</td>
-        <td>Colombia 66.4</td>
-      </tr>
-    
-
-      <tr data-confidence="tossup">
-        <td>2026-06-17</td>
-        <td><strong>Ghana</strong> vs <strong>Panama</strong><span>Toronto</span></td>
-        <td>Panama</td>
-        <td>26.1%</td>
-        <td>26.1%</td>
-        <td>47.8%</td>
-        <td>1.04 - 1.51</td>
-        <td>1-1</td>
-        <td>Ghana 20.6</td>
-      </tr>
-    
-        </tbody>
-      </table>
-    </section>
-
-    <p class="notes">Market edge is the combined rating-point edge from squad market value and betting priors. Betting priors are used only where numeric group-winner odds were available; squad market values are capped at +/-18 rating points so they do not dominate the model.</p>
   </main>
 
   <script>
-    const buttons = Array.from(document.querySelectorAll("button[data-filter]"));
-    const cards = Array.from(document.querySelectorAll(".match-card"));
-    const rows = Array.from(document.querySelectorAll("tbody tr"));
+    const buttons = Array.from(document.querySelectorAll(".tab-btn"));
+    const panels = Array.from(document.querySelectorAll(".tab-panel"));
     buttons.forEach(button => {
       button.addEventListener("click", () => {
-        const filter = button.dataset.filter;
         buttons.forEach(item => item.classList.toggle("active", item === button));
-        cards.forEach(card => {
-          card.style.display = filter === "all" || card.dataset.confidence === filter ? "" : "none";
-        });
-        rows.forEach(row => {
-          row.style.display = filter === "all" || row.dataset.confidence === filter ? "" : "none";
-        });
+        panels.forEach(panel => panel.classList.toggle("active", panel.id === button.dataset.tab));
       });
     });
   </script>
